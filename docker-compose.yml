@@ -1,1 +1,84 @@
-version: '3.8'\n\nservices:\n  postgres:\n    image: postgres:latest\n    restart: always\n    environment:\n      POSTGRES_USER: user\n      POSTGRES_PASSWORD: password\n      POSTGRES_DB: gymflow\n    ports:\n      - '5432:5432'\n\n  redis:\n    image: redis:alpine\n    restart: always\n    ports:\n      - '6379:6379'\n\n  node:\n    image: node:latest\n    working_dir: /app\n    volumes:\n      - .:/app\n    ports:\n      - '3000:3000'\n    command: npm start\n    depends_on:\n      - postgres\n      - redis\n
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14-alpine
+    container_name: elite-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: elite_gym
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - elite-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: elite-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - elite-network
+
+  # Backend API (Development)
+  server:
+    build:
+      context: ./server
+      dockerfile: ../docker/development/Dockerfile.server
+    container_name: elite-server
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_NAME: elite_gym
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - elite-network
+    command: npm run dev
+
+  # Frontend (Development)
+  client:
+    build:
+      context: ./client
+      dockerfile: ../docker/development/Dockerfile.client
+    container_name: elite-client
+    restart: unless-stopped
+    environment:
+      VITE_API_URL: http://localhost:3000/api/v1
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - elite-network
+    command: npm run dev
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  elite-network:
+    driver: bridge

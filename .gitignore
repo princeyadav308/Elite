@@ -1,24 +1,62 @@
-# Node.js
+# Node
 node_modules/
 npm-debug.log
+yarn-error.log
 package-lock.json
+yarn.lock
+*.log
 
-# Build output
-/dist/
-/build/
-
-# React
-/coverage/
-/public/static/
-/src/**/*.css
-
-# Environment variables
+# Environment
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build
+dist/
+build/
+*.tgz
+
+# Testing
+coverage/
+.nyc_output/
+
+# Logs
+logs/
+*.log
+
+# Database
+*.sql.backup
+*.db
 
 # Misc
-.DS_Store
+.cache/
+.temp/
+tmp/
+
+# OS
 Thumbs.db
+.DS_Store
+
+# Docker
+.dockerignore
+
+# Development
+.env.development
+.env.test
+
+# Production
+.env.production
+
+# Project Documentation (excluded from repo)
+DEVELOPMENT_ROADMAP.md
+ELITE_PRD.md
+elite_schema_diagram*.jsx
+*schema_diagram*

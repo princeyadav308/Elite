@@ -1,1 +1,41 @@
-{\n  "name": "gymflow-pro",\n  "version": "1.0.0",\n  "description": "GymFlow Pro backend and frontend monorepo setup",\n  "main": "index.js",\n  "scripts": {\n    "start": "node index.js",\n    "test": "echo 'Error: no test specified' && exit 1"\n  },\n  "repository": {\n    "type": "git",\n    "url": "https://github.com/princeyadav308/gymflow-pro.git"\n  },\n  "author": "princeyadav308",\n  "license": "ISC",\n  "dependencies": {},\n  "devDependencies": {}\n}
+{
+    "name": "elite-gym-management",
+    "version": "1.0.0",
+    "description": "ELITE Gym Management System - Full-stack SaaS Platform",
+    "private": true,
+    "workspaces": [
+        "server",
+        "client"
+    ],
+    "scripts": {
+        "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+        "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+        "dev:server": "cd server && npm run dev",
+        "dev:client": "cd client && npm run dev",
+        "build": "cd server && npm run build && cd ../client && npm run build",
+        "start:server": "cd server && npm start",
+        "start:client": "cd client && npm run preview",
+        "test": "npm run test:server && npm run test:client",
+        "test:server": "cd server && npm test",
+        "test:client": "cd client && npm test",
+        "lint": "npm run lint:server && npm run lint:client",
+        "lint:server": "cd server && npm run lint",
+        "lint:client": "cd client && npm run lint",
+        "db:migrate": "cd server && npm run db:migrate",
+        "db:seed": "cd server && npm run db:seed",
+        "db:reset": "cd server && npm run db:reset",
+        "db:fresh": "cd server && npm run db:fresh",
+        "docker:up": "docker-compose up -d",
+        "docker:down": "docker-compose down",
+        "docker:logs": "docker-compose logs -f"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/princeyadav308/gymflow-pro.git"
+    },
+    "author": "princeyadav308",
+    "license": "ISC",
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
