@@ -47,8 +47,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/princeyadav308/gymflow-pro.git
-   cd gymflow-pro
+   git clone https://github.com/princeyadav308/Elite.git
+   cd Elite
    ```
 
 2. **Install dependencies**
@@ -86,7 +86,7 @@
 ## 📁 Project Structure
 
 ```
-gymflow-pro/
+Elite/
 ├── server/                 # Backend API (Node.js + Express)
 │   ├── src/
 │   │   ├── api/           # Routes, controllers, middlewares
@@ -322,7 +322,7 @@ This project is licensed under the ISC License.
 ## 👥 Team
 
 - **Author**: princeyadav308
-- **Repository**: [gymflow-pro](https://github.com/princeyadav308/gymflow-pro)
+- **Repository**: [Elite](https://github.com/princeyadav308/Elite)
 
 ---
 
@@ -339,7 +339,7 @@ This project is licensed under the ISC License.
 
 **Built with ❤️ by the ELITE team**
 
-[Report Bug](https://github.com/princeyadav308/gymflow-pro/issues) •
-[Request Feature](https://github.com/princeyadav308/gymflow-pro/issues)
+[Report Bug](https://github.com/princeyadav308/Elite/issues) •
+[Request Feature](https://github.com/princeyadav308/Elite/issues)
 
 </div>
