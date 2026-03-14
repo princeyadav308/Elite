@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Trainer Client Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --groww-primary: #00d09c;
+            --groww-bg: #f8f9fa;
+            --groww-border: #ebedef;
+            --text-main: #44475b;
+            --text-secondary: #7c7e8c;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--groww-bg);
+            color: var(--text-main);
+        }
+        .groww-card {
+            background: #ffffff;
+            border: 1px solid var(--groww-border);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-[var(--groww-border)] sticky top-0 z-50">
+<div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-[var(--groww-primary)] rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-bold text-[#44475b]">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-8 text-sm font-semibold text-[var(--text-secondary)]">
+<a class="hover:text-[var(--groww-primary)] transition-colors py-5" href="#">Dashboard</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors py-5" href="#">Schedule</a>
+<a class="text-[var(--groww-primary)] border-b-2 border-[var(--groww-primary)] py-5" href="#">My Clients</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors py-5" href="#">Library</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors py-5" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[var(--text-secondary)] hover:text-[var(--groww-primary)] relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-gray-100">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-[#44475b]">Sarah Connor</p>
+<p class="text-xs text-[var(--text-secondary)]">Senior Trainer</p>
+</div>
+<button class="flex items-center">
+<img alt="Trainer" class="w-9 h-9 rounded-full border border-gray-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHBgY69tsDkYfB13LFa4cavTyC1uZism_YgboIptXEDlbh8g74n92P27kdZCk0hdRYleSV9kmVx18PaFuSCm3WyPWKh2uFuZ_qgQUcvQy1oOBnCUdDHHIW4qCyNxNZbfkpPVQo3r9eZHEHKfHZm_mUM5Ia7lpAWzVtqQ3LkqqzA__XXKLlAEKvm-WtkbqEeaePgq_4kKM9i8tZldwRw9iuX3aK41P0dXx_eTepXwrMdOOsBBZPlI7KTi4eTA7_ef0dBClDQTxR-tow"/>
+<span class="material-symbols-outlined text-[var(--text-secondary)] text-lg ml-1">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-1 max-w-[1400px] mx-auto px-6 py-8 w-full">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h1 class="text-2xl font-bold text-[#44475b]">Client Management</h1>
+<p class="text-sm text-[var(--text-secondary)] mt-1">Manage your assigned members and their progress</p>
+</div>
+<button class="bg-[var(--groww-primary)] text-white px-5 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-all flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg">add</span>
+                Add New Client
+            </button>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<div class="col-span-12 lg:col-span-9">
+<div class="groww-card overflow-hidden">
+<div class="p-5 border-b border-[var(--groww-border)] flex flex-col sm:flex-row gap-4 justify-between items-center bg-white">
+<div class="relative w-full sm:w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-1 focus:ring-[var(--groww-primary)] focus:border-[var(--groww-primary)] outline-none transition-all" placeholder="Search clients by name..." type="text"/>
+</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-[var(--groww-border)] rounded-lg text-sm font-semibold text-[var(--text-main)] hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                                Filter
+                            </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-[var(--groww-border)] rounded-lg text-sm font-semibold text-[var(--text-main)] hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined text-lg">sort</span>
+                                Sort
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50/50 border-b border-[var(--groww-border)]">
+<th class="p-5 text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Member</th>
+<th class="p-5 text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Goal</th>
+<th class="p-5 text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Last Session</th>
+<th class="p-5 text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Next Scheduled</th>
+<th class="p-5 text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[var(--groww-border)] bg-white">
+<tr class="hover:bg-gray-50 transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-4">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover border border-gray-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBu-JwZqQLe-1iN3rzpsXotJM74CQxypuTIVi2VOfGxUXGZ_DhvmvNF6XDcmiO-1advc7ZVPbZOranwGvMCNps0Zv3zqoHPqXsCfqgvRPdTmB2CSS3IVbhIT_ruJxWGMle2wr_XSTxzDQVqyi_OzvpEcfbvuIWJ1mlET-LvoNsBFkWnwIP54C4pgUjDHHWufZsLmBtu_nrCU4rE3DKAc3OMXjHXaC9Exy38zkYdrCjQWIVuiakufN5mw_cYKZ24fYM7NsIBsdsxyre"/>
+<div>
+<p class="font-bold text-[#44475b] text-sm">Marcus Holloway</p>
+<p class="text-xs text-[var(--text-secondary)]">ID: #M-9021</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-50 text-purple-600 border border-purple-100">
+                                            Muscle Gain
+                                        </span>
+</td>
+<td class="p-5">
+<p class="text-sm text-[#44475b] font-medium">Oct 24, 2024</p>
+<p class="text-xs text-[var(--text-secondary)]">Upper Body</p>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+<p class="text-sm font-bold text-[#44475b]">Today, 4:00 PM</p>
+</div>
+</td>
+<td class="p-5 text-right">
+<button class="text-xs font-bold text-[var(--groww-primary)] border border-[var(--groww-primary)] px-3 py-1.5 rounded hover:bg-[var(--groww-primary)] hover:text-white transition-colors">
+                                            View Details
+                                        </button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-4">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover border border-gray-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_A-jS3iLajgkkBBzGrhall-vE0Veq8rBTrsizjYeaOOvmoaM5vbkvkUOp-FePbn-VBcaIjPOmGw5tMXo2vt2mAC1553We9FYFcyBaYHedaxr1uw2ALW5qSA134xfEOVukXZxbwsgBrDiUVPDTdbtbHMcgiPaXj4WM_VUKeRh2oguim7C7pliQMbydLmEU9E14jDnAGarhRYNFdVEai9j9JeJX7Sdl7pUFdIskW_QjN825Pta_6jhrZ7Z21gaildkUSdjXdwWBqRMV"/>
+<div>
+<p class="font-bold text-[#44475b] text-sm">Elena Fisher</p>
+<p class="text-xs text-[var(--text-secondary)]">ID: #M-8832</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-600 border border-amber-100">
+                                            Weight Loss
+                                        </span>
+</td>
+<td class="p-5">
+<p class="text-sm text-[#44475b] font-medium">Oct 22, 2024</p>
+<p class="text-xs text-[var(--text-secondary)]">Cardio Mix</p>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-orange-400"></div>
+<p class="text-sm font-medium text-[#44475b]">Tomorrow, 10:00 AM</p>
+</div>
+</td>
+<td class="p-5 text-right">
+<button class="text-xs font-bold text-[var(--groww-primary)] border border-[var(--groww-primary)] px-3 py-1.5 rounded hover:bg-[var(--groww-primary)] hover:text-white transition-colors">
+                                            View Details
+                                        </button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-4">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover border border-gray-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCatJOywNQAUgGl2HvomSBzes7z1kJlsIwmeXvD-kT3wQPDAjxr4X6VSr1Km9Y45ZSELicR4iLUQHx-mQhSs86rbVOwzdkIaUjEbtzv5IaBIRnUTtSIhX9PoYYQCAO4s0jWjG5KxfdlAnXhFaEUmV_DdJmlpLMIWjSWwy8oDhSYFA0tM5q-ou_1toOdJStCAieGZo_mgAoXK0c8jUnH8xZSGfPtLPgW5O89Mfb6s4Y_CRMc4KaRbzpZyOYuflUUECzBzLugv7nZLaGg"/>
+<div>
+<p class="font-bold text-[#44475b] text-sm">Nathan Drake</p>
+<p class="text-xs text-[var(--text-secondary)]">ID: #M-9100</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-600 border border-blue-100">
+                                            Endurance
+                                        </span>
+</td>
+<td class="p-5">
+<p class="text-sm text-[#44475b] font-medium">Oct 20, 2024</p>
+<p class="text-xs text-[var(--text-secondary)]">HIIT</p>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<p class="text-sm font-medium text-[#44475b]">Oct 28, 9:00 AM</p>
+</div>
+</td>
+<td class="p-5 text-right">
+<button class="text-xs font-bold text-[var(--groww-primary)] border border-[var(--groww-primary)] px-3 py-1.5 rounded hover:bg-[var(--groww-primary)] hover:text-white transition-colors">
+                                            View Details
+                                        </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-[var(--groww-border)] flex items-center justify-between bg-white">
+<p class="text-xs text-[var(--text-secondary)]">Showing <span class="font-bold text-[#44475b]">1-3</span> of <span class="font-bold text-[#44475b]">24</span> clients</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-[var(--groww-border)] rounded text-xs text-[var(--text-secondary)] disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-[var(--groww-border)] rounded text-xs text-[var(--text-main)] hover:bg-gray-50">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3 space-y-6">
+<div class="groww-card p-6 bg-emerald-50 border-emerald-100 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-emerald-100/50 rounded-full"></div>
+<h3 class="font-bold text-[#44475b] mb-4 relative z-10">Active Clients</h3>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="text-4xl font-bold text-emerald-600">24</span>
+<span class="text-xs text-emerald-700 font-medium">+2 this week</span>
+</div>
+<div class="mt-4 pt-4 border-t border-emerald-100 flex justify-between text-xs text-[#44475b] relative z-10">
+<span>Pending Assessments</span>
+<span class="font-bold">3</span>
+</div>
+</div>
+<div class="groww-card">
+<div class="p-4 border-b border-[var(--groww-border)] flex justify-between items-center bg-white rounded-t-lg">
+<h3 class="text-sm font-bold text-[#44475b]">Upcoming Sessions</h3>
+<a class="text-[10px] font-bold text-[var(--groww-primary)] uppercase tracking-wide hover:underline" href="#">View Calendar</a>
+</div>
+<div class="divide-y divide-[var(--groww-border)] bg-white rounded-b-lg">
+<div class="p-4 hover:bg-gray-50 transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-[#44475b] bg-gray-100 px-2 py-0.5 rounded">16:00</span>
+<span class="text-[10px] text-[var(--text-secondary)]">60 min</span>
+</div>
+<p class="text-sm font-bold text-[#44475b]">Marcus Holloway</p>
+<p class="text-xs text-[var(--text-secondary)] mt-0.5">Upper Body Hypertrophy</p>
+</div>
+<div class="p-4 hover:bg-gray-50 transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-[#44475b] bg-gray-100 px-2 py-0.5 rounded">Tomorrow</span>
+<span class="text-[10px] text-[var(--text-secondary)]">45 min</span>
+</div>
+<p class="text-sm font-bold text-[#44475b]">Elena Fisher</p>
+<p class="text-xs text-[var(--text-secondary)] mt-0.5">HIIT Cardio Session</p>
+</div>
+</div>
+</div>
+<div class="groww-card p-5 bg-white">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-amber-500">priority_high</span>
+<h3 class="text-sm font-bold text-[#44475b]">Expiring Plans</h3>
+</div>
+<p class="text-xs text-[var(--text-secondary)] mb-3">2 clients have memberships expiring in the next 7 days.</p>
+<button class="w-full py-2 border border-[var(--groww-border)] text-xs font-bold text-[#44475b] rounded hover:bg-gray-50 transition-colors">
+                        Review Accounts
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-8 text-center border-t border-[var(--groww-border)] bg-white">
+<div class="max-w-[1400px] mx-auto px-6 flex flex-col items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--groww-primary)] text-lg">fitness_center</span>
+<span class="font-bold text-slate-700 text-sm">FlexHub</span>
+</div>
+<p class="text-[10px] text-[var(--text-secondary)]">© 2024 FlexHub Gym Management System. Trainer Dashboard.</p>
+</div>
+</footer>
+
+</body></html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Trainer Schedule</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --groww-primary: #00d09c;
+            --groww-bg: #f8f9fa;
+            --groww-border: #ebedef;
+            --text-main: #44475b;
+            --text-secondary: #7c7e8c;
+            --brand-gradient: linear-gradient(135deg, #00d09c 0%, #00b8ff 100%);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--groww-bg);
+            color: var(--text-main);
+        }
+        .groww-card {
+            background: #ffffff;
+            border: 1px solid var(--groww-border);
+            border-radius: 8px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .calendar-scroll::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .calendar-scroll::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 3px;
+        }
+        .calendar-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .calendar-cell {
+            min-height: 120px;
+            transition: background-color 0.2s;
+        }
+        .calendar-cell:hover {
+            background-color: #fbfcfd;
+        }
+        .session-indicator {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            font-weight: 600;
+        }
+        .active-nav {
+            color: var(--groww-primary);
+            position: relative;
+        }
+        .active-nav::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--groww-primary);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-[var(--groww-border)] sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg flex items-center justify-center text-white" style="background: var(--brand-gradient)">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight text-[#44475b]">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-8 text-sm font-semibold text-[var(--text-secondary)]">
+<a class="hover:text-[var(--groww-primary)] transition-colors" href="#">Dashboard</a>
+<a class="active-nav" href="#">Schedule</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors" href="#">My Clients</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors" href="#">Library</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-50 text-[var(--text-secondary)] relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="h-6 w-[1px] bg-gray-200 mx-1"></div>
+<button class="flex items-center gap-2 pl-2 pr-1 py-1 rounded-full hover:bg-gray-50 transition-colors">
+<div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xs">JD</div>
+<span class="hidden sm:inline text-sm font-semibold text-[var(--text-main)]">John Doe</span>
+<span class="material-symbols-outlined text-[var(--text-secondary)] text-lg">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="flex-1 max-w-[1440px] mx-auto w-full px-6 py-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h1 class="text-2xl font-bold text-[#44475b]">My Schedule</h1>
+<p class="text-[var(--text-secondary)] text-sm">Manage your training sessions and availability.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex bg-white border border-[var(--groww-border)] p-1 rounded-lg">
+<button class="px-4 py-1.5 text-xs font-bold rounded-md text-[var(--text-secondary)] hover:bg-gray-50">Day</button>
+<button class="px-4 py-1.5 text-xs font-bold rounded-md text-[var(--text-secondary)] hover:bg-gray-50">Week</button>
+<button class="px-4 py-1.5 text-xs font-bold rounded-md bg-[var(--groww-primary)] text-white shadow-sm">Month</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 lg:col-span-9 flex flex-col groww-card overflow-hidden">
+<div class="p-4 border-b border-[var(--groww-border)] flex items-center justify-between bg-white">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<button class="p-1.5 hover:bg-gray-100 rounded-lg text-[var(--text-secondary)]">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-4 py-1.5 hover:bg-gray-100 rounded-lg text-[var(--text-secondary)] font-bold text-xs uppercase tracking-wider">Today</button>
+<button class="p-1.5 hover:bg-gray-100 rounded-lg text-[var(--text-secondary)]">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<h2 class="text-lg font-bold text-[#44475b]">October 2023</h2>
+</div>
+<div class="flex items-center gap-4 text-xs font-bold">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-emerald-700">PT Sessions</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+<span class="text-indigo-700">Classes</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-7 border-b border-[var(--groww-border)] bg-gray-50">
+<div class="p-3 text-center text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Sun</div>
+<div class="p-3 text-center text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Mon</div>
+<div class="p-3 text-center text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Tue</div>
+<div class="p-3 text-center text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Wed</div>
+<div class="p-3 text-center text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Thu</div>
+<div class="p-3 text-center text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Fri</div>
+<div class="p-3 text-center text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-widest">Sat</div>
+</div>
+<div class="grid grid-cols-7 flex-1">
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2 bg-gray-50/50 text-gray-400">24</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2 bg-gray-50/50 text-gray-400">25</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2 bg-gray-50/50 text-gray-400">26</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2 bg-gray-50/50 text-gray-400">27</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2 bg-gray-50/50 text-gray-400">28</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2 bg-gray-50/50 text-gray-400">29</div>
+<div class="calendar-cell border-b border-[var(--groww-border)] p-2 bg-gray-50/50 text-gray-400">30</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2"><span class="text-xs font-bold">1</span></div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2">
+<span class="text-xs font-bold">2</span>
+<div class="mt-1">
+<span class="session-indicator bg-emerald-50 text-emerald-700">09:00 PT - Sarah M.</span>
+<span class="session-indicator bg-indigo-50 text-indigo-700">11:00 Yoga Flow</span>
+</div>
+</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2">
+<span class="text-xs font-bold">3</span>
+<div class="mt-1">
+<span class="session-indicator bg-emerald-50 text-emerald-700">10:00 PT - Mike R.</span>
+</div>
+</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2"><span class="text-xs font-bold">4</span></div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2">
+<span class="text-xs font-bold">5</span>
+<div class="mt-1">
+<span class="session-indicator bg-orange-50 text-orange-700">12:00 Consult</span>
+</div>
+</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2"><span class="text-xs font-bold">6</span></div>
+<div class="calendar-cell border-b border-[var(--groww-border)] p-2"><span class="text-xs font-bold">7</span></div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2"><span class="text-xs font-bold">8</span></div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2">
+<span class="text-xs font-bold">9</span>
+<div class="mt-1">
+<span class="session-indicator bg-emerald-50 text-emerald-700">08:30 PT - Emma L.</span>
+</div>
+</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2 bg-emerald-50/30">
+<span class="text-xs font-bold text-[var(--groww-primary)]">10</span>
+<div class="mt-1">
+<span class="session-indicator bg-emerald-100 text-emerald-800">09:00 Marcus H.</span>
+<span class="session-indicator bg-indigo-100 text-indigo-800">17:00 HIIT Blast</span>
+</div>
+</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2"><span class="text-xs font-bold">11</span></div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2">
+<span class="text-xs font-bold">12</span>
+<div class="mt-1">
+<span class="session-indicator bg-emerald-50 text-emerald-700">09:00 PT - Sarah M.</span>
+<a class="text-[9px] text-[var(--groww-primary)] font-bold mt-1 block" href="#">+ 3 more</a>
+</div>
+</div>
+<div class="calendar-cell border-r border-b border-[var(--groww-border)] p-2"><span class="text-xs font-bold">13</span></div>
+<div class="calendar-cell border-b border-[var(--groww-border)] p-2"><span class="text-xs font-bold">14</span></div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-6">
+<button class="w-full text-white py-4 rounded-xl font-bold text-sm shadow-lg shadow-emerald-200/50 flex items-center justify-center gap-2 uppercase tracking-widest" style="background: var(--brand-gradient)">
+<span class="material-symbols-outlined">add_circle</span>
+                Add to Schedule
+            </button>
+<div class="groww-card p-2">
+<div class="flex flex-col">
+<button class="flex items-center justify-between px-3 py-3 rounded-lg hover:bg-gray-50 text-sm font-semibold text-[var(--text-main)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[var(--groww-primary)]">calendar_month</span>
+<span>Calendar Sync</span>
+</div>
+<span class="material-symbols-outlined text-gray-300">chevron_right</span>
+</button>
+<button class="flex items-center justify-between px-3 py-3 rounded-lg hover:bg-gray-50 text-sm font-semibold text-[var(--text-main)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[var(--groww-primary)]">settings</span>
+<span>Availability</span>
+</div>
+<span class="material-symbols-outlined text-gray-300">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="groww-card flex flex-col overflow-hidden">
+<div class="p-4 border-b border-[var(--groww-border)] flex items-center justify-between">
+<h3 class="font-bold text-[#44475b] flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500">pending_actions</span>
+                        Requests
+                    </h3>
+<span class="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-0.5 rounded-full">3 NEW</span>
+</div>
+<div class="p-4 space-y-4">
+<div class="border border-[var(--groww-border)] rounded-lg p-3 bg-white">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">EL</div>
+<div>
+<p class="text-xs font-bold text-[var(--text-main)]">Emma L.</p>
+<p class="text-[10px] text-[var(--text-secondary)]">PT • Today, 14:00</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-[var(--groww-primary)] text-white py-1.5 rounded text-[10px] font-bold">Accept</button>
+<button class="flex-1 border border-gray-200 text-[var(--text-secondary)] py-1.5 rounded text-[10px] font-bold">Decline</button>
+</div>
+</div>
+</div>
+</div>
+<div class="groww-card p-4">
+<h3 class="font-bold text-[#44475b] mb-4 text-xs uppercase tracking-wider">Stats</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs text-[var(--text-secondary)]">Monthly Bookings</span>
+<span class="text-xs font-bold">112</span>
+</div>
+<div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-[var(--groww-primary)] h-full w-[85%]"></div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="text-xs text-[var(--text-secondary)]">Projected Revenue</span>
+<span class="text-xs font-bold text-emerald-600">$8,420</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-8 text-center border-t border-[var(--groww-border)] bg-white">
+<div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-3">
+<div class="flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-[var(--groww-primary)]">fitness_center</span>
+<span class="font-bold text-slate-700">FlexHub</span>
+</div>
+<p class="text-[10px] font-medium text-[var(--text-secondary)] uppercase tracking-widest">© 2024 FlexHub Management</p>
+</div>
+</footer>
+
+</body></html>

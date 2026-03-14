@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Add New Client</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --groww-primary: #10b981;
+            --groww-bg: #f0fdfa;
+            --groww-border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #f0fdfa 100%);
+            color: var(--text-main);
+        }
+        .groww-card {
+            background: #ffffff;
+            border: 1px solid var(--groww-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input, select, textarea {
+            @apply focus:ring-emerald-500 focus:border-emerald-500 block w-full border-slate-200 rounded-lg text-sm transition-all;
+        }
+        label {
+            @apply block text-sm font-semibold text-slate-700 mb-1.5;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
+<div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-bold text-slate-800">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-500">
+<a class="hover:text-emerald-600 transition-colors" href="#">Dashboard</a>
+<a class="hover:text-emerald-600 transition-colors" href="#">Schedule</a>
+<a class="text-emerald-600 border-b-2 border-emerald-500 py-5" href="#">My Clients</a>
+<a class="hover:text-emerald-600 transition-colors" href="#">Library</a>
+<a class="hover:text-emerald-600 transition-colors" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:text-emerald-600">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-gray-100">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-slate-800">Sarah Connor</p>
+<p class="text-xs text-slate-500">Senior Trainer</p>
+</div>
+<img alt="Trainer" class="w-9 h-9 rounded-full border border-gray-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHBgY69tsDkYfB13LFa4cavTyC1uZism_YgboIptXEDlbh8g74n92P27kdZCk0hdRYleSV9kmVx18PaFuSCm3WyPWKh2uFuZ_qgQUcvQy1oOBnCUdDHHIW4qCyNxNZbfkpPVQo3r9eZHEHKfHZm_mUM5Ia7lpAWzVtqQ3LkqqzA__XXKLlAEKvm-WtkbqEeaePgq_4kKM9i8tZldwRw9iuX3aK41P0dXx_eTepXwrMdOOsBBZPlI7KTi4eTA7_ef0dBClDQTxR-tow"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-1 max-w-[800px] mx-auto px-6 py-12 w-full">
+<div class="mb-8 flex items-center gap-4">
+<a class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center bg-white hover:bg-slate-50 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-600">arrow_back</span>
+</a>
+<div>
+<h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">Add New Client</h1>
+<p class="text-sm text-slate-500">Onboard a new member to your personal roster</p>
+</div>
+</div>
+<div class="groww-card p-8">
+<form class="space-y-10">
+<section>
+<div class="flex items-center gap-2 mb-6 border-b border-slate-50 pb-2">
+<span class="material-symbols-outlined text-emerald-500">badge</span>
+<h2 class="text-lg font-bold text-slate-800">Client Identity</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="col-span-2 md:col-span-1">
+<label for="full_name">Full Name</label>
+<input id="full_name" placeholder="e.g. John Doe" type="text"/>
+</div>
+<div class="col-span-2 md:col-span-1">
+<label for="email">Email Address</label>
+<input id="email" placeholder="john@example.com" type="email"/>
+</div>
+<div class="col-span-2">
+<label for="member_id">Member ID Search</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10" id="member_id" placeholder="Search by ID to link existing gym member..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center gap-2 mb-6 border-b border-slate-50 pb-2">
+<span class="material-symbols-outlined text-emerald-500">target</span>
+<h2 class="text-lg font-bold text-slate-800">Goal Setting</h2>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<label class="cursor-pointer group">
+<input class="sr-only peer" name="goals" type="checkbox" value="muscle_gain"/>
+<div class="border border-slate-200 rounded-xl p-4 text-center peer-checked:bg-emerald-50 peer-checked:border-emerald-500 peer-checked:text-emerald-700 hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined block mb-1">fitness_center</span>
+<span class="text-xs font-bold">Muscle Gain</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="sr-only peer" name="goals" type="checkbox" value="weight_loss"/>
+<div class="border border-slate-200 rounded-xl p-4 text-center peer-checked:bg-emerald-50 peer-checked:border-emerald-500 peer-checked:text-emerald-700 hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined block mb-1">monitor_weight</span>
+<span class="text-xs font-bold">Weight Loss</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="sr-only peer" name="goals" type="checkbox" value="endurance"/>
+<div class="border border-slate-200 rounded-xl p-4 text-center peer-checked:bg-emerald-50 peer-checked:border-emerald-500 peer-checked:text-emerald-700 hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined block mb-1">speed</span>
+<span class="text-xs font-bold">Endurance</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="sr-only peer" name="goals" type="checkbox" value="flexibility"/>
+<div class="border border-slate-200 rounded-xl p-4 text-center peer-checked:bg-emerald-50 peer-checked:border-emerald-500 peer-checked:text-emerald-700 hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined block mb-1">self_improvement</span>
+<span class="text-xs font-bold">Flexibility</span>
+</div>
+</label>
+</div>
+</section>
+<section>
+<div class="flex items-center gap-2 mb-6 border-b border-slate-50 pb-2">
+<span class="material-symbols-outlined text-emerald-500">description</span>
+<h2 class="text-lg font-bold text-slate-800">Training Plan</h2>
+</div>
+<label for="plan_select">Select Initial Program</label>
+<select id="plan_select">
+<option value="">Choose from library templates...</option>
+<option>Full Body Recomposition (12 Weeks)</option>
+<option>Advanced Hypertrophy Split</option>
+<option>Beginner Strength Fundamentals</option>
+<option>Mobility &amp; Posture Restoration</option>
+<option>Custom Plan (Drafted for Marcus)</option>
+</select>
+</section>
+<section>
+<div class="flex items-center gap-2 mb-6 border-b border-slate-50 pb-2">
+<span class="material-symbols-outlined text-emerald-500">event</span>
+<h2 class="text-lg font-bold text-slate-800">Scheduling</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label for="initial_assessment">Initial Assessment</label>
+<input id="initial_assessment" type="datetime-local"/>
+</div>
+<div>
+<label for="first_session">First Training Session</label>
+<input id="first_session" type="datetime-local"/>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center gap-2 mb-6 border-b border-slate-50 pb-2">
+<span class="material-symbols-outlined text-emerald-500">edit_note</span>
+<h2 class="text-lg font-bold text-slate-800">Notes</h2>
+</div>
+<label for="assessment_notes">Trainer's Initial Assessment Notes</label>
+<textarea id="assessment_notes" placeholder="Detail injury history, lifestyle factors, or specific equipment preferences..." rows="4"></textarea>
+</section>
+<div class="pt-6">
+<button class="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold text-base hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined">person_add</span>
+                        Confirm &amp; Add to My Clients
+                    </button>
+<p class="text-center text-xs text-slate-400 mt-4">This will notify the member and add them to your active dashboard.</p>
+</div>
+</form>
+</div>
+</main>
+<footer class="mt-auto py-8 text-center bg-white/50 backdrop-blur-sm border-t border-slate-200">
+<div class="max-w-[1400px] mx-auto px-6 flex flex-col items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-lg">fitness_center</span>
+<span class="font-bold text-slate-700 text-sm">FlexHub</span>
+</div>
+<p class="text-[10px] text-slate-400">© 2024 FlexHub Gym Management System. Professional Trainer View.</p>
+</div>
+</footer>
+
+</body></html>

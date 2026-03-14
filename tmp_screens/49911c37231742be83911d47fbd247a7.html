@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Trainer Workout Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #00d09c;
+            --primary-dark: #00b88a;
+            --bg-gradient-start: #f0fdfa;
+            --bg-gradient-end: #ecfdf5;
+            --text-main: #44475b;
+            --text-secondary: #7c7e8c;
+            --card-border: #f3f4f6;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-main);
+        }
+        .flex-card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .flex-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+            border-color: #d1fae5;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-link {
+            @apply flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 rounded-lg transition-all hover:bg-white hover:text-[var(--primary)] hover:shadow-sm;
+        }
+        .sidebar-link.active {
+            @apply bg-white text-[var(--primary)] shadow-sm font-bold border border-gray-100;
+        }
+        .nav-link {
+            @apply px-4 py-2 text-sm font-semibold transition-colors;
+        }
+        .nav-link:not(.active) {
+            @apply text-[var(--text-secondary)] hover:text-[var(--primary)];
+        }
+        .nav-link.active {
+            @apply text-[var(--primary)] bg-emerald-50 rounded-md;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-bold text-[#44475b]">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-1">
+<a class="nav-link" href="#">Dashboard</a>
+<a class="nav-link" href="#">Schedule</a>
+<a class="nav-link" href="#">My Clients</a>
+<a class="nav-link active" href="#">Library</a>
+<a class="nav-link" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors">
+<span class="material-symbols-outlined text-xl font-light">notifications</span>
+</button>
+<button class="flex items-center gap-2 p-1 pr-3 rounded-full hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100">
+<div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-xs border border-white">
+                    JD
+                </div>
+<span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<aside class="w-full lg:w-64 flex-shrink-0 space-y-8">
+<div>
+<h3 class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Library</h3>
+<nav class="space-y-1">
+<a class="sidebar-link active" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                        All Templates
+                    </a>
+<a class="sidebar-link" href="#">
+<span class="material-symbols-outlined">bookmarks</span>
+                        My Templates
+                    </a>
+<a class="sidebar-link" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+                        Popular
+                    </a>
+<a class="sidebar-link" href="#">
+<span class="material-symbols-outlined">share</span>
+                        Shared with Me
+                    </a>
+</nav>
+</div>
+<div>
+<h3 class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Difficulty Level</h3>
+<div class="space-y-3 px-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-gray-300 text-[var(--primary)] focus:ring-[var(--primary)] h-4 w-4" type="checkbox"/>
+<span class="text-sm text-gray-600 group-hover:text-gray-900">Beginner</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-gray-300 text-[var(--primary)] focus:ring-[var(--primary)] h-4 w-4" type="checkbox"/>
+<span class="text-sm text-gray-600 group-hover:text-gray-900">Intermediate</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-gray-300 text-[var(--primary)] focus:ring-[var(--primary)] h-4 w-4" type="checkbox"/>
+<span class="text-sm text-gray-600 group-hover:text-gray-900">Advanced</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Categories</h3>
+<div class="flex flex-wrap gap-2 px-4">
+<button class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors">Strength</button>
+<button class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors">Cardio</button>
+<button class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors">HIIT</button>
+<button class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors">Yoga</button>
+<button class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors">Recovery</button>
+</div>
+</div>
+</aside>
+<div class="flex-1">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+<div>
+<h1 class="text-2xl font-bold text-[#44475b]">Workout Library</h1>
+<p class="text-sm text-[var(--text-secondary)] mt-1">Manage and assign your workout templates</p>
+</div>
+<button class="flex items-center gap-2 bg-[var(--primary)] hover:opacity-90 text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-emerald-100 transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+                    Create New Template
+                </button>
+</div>
+<div class="mb-8 flex flex-col sm:flex-row gap-4">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">filter_list</span>
+<input class="pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-sm w-full focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent shadow-sm placeholder-gray-400" placeholder="Filter by name, tag, or equipment..." type="text"/>
+</div>
+<select class="px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-600 focus:ring-2 focus:ring-[var(--primary)] shadow-sm outline-none cursor-pointer">
+<option>Newest First</option>
+<option>Most Popular</option>
+<option>Duration: Short to Long</option>
+</select>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<article class="flex-card flex flex-col overflow-hidden group cursor-pointer">
+<div class="h-40 bg-gradient-to-r from-blue-500 to-indigo-600 relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 z-10 backdrop-blur-[1px]">
+<span class="material-symbols-outlined text-white text-5xl drop-shadow-lg">play_circle</span>
+</div>
+<img alt="Workout" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHOe7aCLz7gxR8eKISPvzOMz-1PLhhJxWrYt-uYW5aaX8MdRPxjM2X4QyiGkS4Qyn-xilJZtWI2JffjNAavYJvb15nhu3xtja7yjLTJ63sbT_670xGfER1Ve3HiJJLiz1lqi73Q8nQMIji7QhIfE2jZSuWFi6_YWf8-42ccX6VD0alNZXR814fHfXLxez_tW9ZTHrAN9LezKw5Hhxmsw0ZJy0JJrLh5aFnW1CNg1YNIMu0S0oTysOx60qRAxynWjKHBjwKLk7cxZVD"/>
+<div class="absolute top-3 right-3 bg-black/30 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded">
+                            45 min
+                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Strength</span>
+<span class="px-2 py-1 bg-orange-50 text-orange-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Intermediate</span>
+</div>
+<h3 class="font-bold text-[#44475b] text-lg mb-1 group-hover:text-[var(--primary)] transition-colors">Full Body Blast</h3>
+<p class="text-sm text-[var(--text-secondary)] line-clamp-2 mb-4">A comprehensive routine targeting all major muscle groups with compound movements.</p>
+<div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+<div class="flex items-center gap-1 text-xs text-gray-400">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>Updated 2d ago</span>
+</div>
+<button class="text-[var(--primary)] font-bold text-sm hover:underline">View Details</button>
+</div>
+</div>
+</article>
+<article class="flex-card flex flex-col overflow-hidden group cursor-pointer">
+<div class="h-40 bg-gradient-to-r from-emerald-400 to-teal-500 relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 z-10 backdrop-blur-[1px]">
+<span class="material-symbols-outlined text-white text-5xl drop-shadow-lg">play_circle</span>
+</div>
+<img alt="Workout" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRHU1AuqKVRjhjMfXpsOn1jckBTfSy6HB7mYRfTylE7etHt-PYCYIFUvYXWaZ2f7StAcxTN8wh--uq1PJea4LCNqlU41t0F0zJy1v2bh_SxXvuQ9AD7MufIWDjhrpiGa-28W_Nba2HPv1_xSoMc4yb6vLAByGf1ecgmiIr9D-ny2rzIm2MM8D77gHTsvyRcFMUzl4h9FNC8e9cgSNps64ZiXOsZZhszTrfFqpdY-Jl94RzJT-MScGluMFhcGQBftXc0VkhgEtrcJ3i"/>
+<div class="absolute top-3 right-3 bg-black/30 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded">
+                            30 min
+                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">HIIT</span>
+<span class="px-2 py-1 bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Advanced</span>
+</div>
+<h3 class="font-bold text-[#44475b] text-lg mb-1 group-hover:text-[var(--primary)] transition-colors">High Octane Shred</h3>
+<p class="text-sm text-[var(--text-secondary)] line-clamp-2 mb-4">High intensity intervals designed to max out your heart rate and burn calories.</p>
+<div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+<div class="flex items-center gap-1 text-xs text-gray-400">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>Updated 5d ago</span>
+</div>
+<button class="text-[var(--primary)] font-bold text-sm hover:underline">View Details</button>
+</div>
+</div>
+</article>
+<article class="flex-card flex flex-col overflow-hidden group cursor-pointer">
+<div class="h-40 bg-gradient-to-r from-purple-400 to-pink-500 relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 z-10 backdrop-blur-[1px]">
+<span class="material-symbols-outlined text-white text-5xl drop-shadow-lg">play_circle</span>
+</div>
+<img alt="Workout" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ZTTPcbAK_rumVkIgce2FMZytGGlHNh4t-wT8pJ3znbCaiBBtkYceFwS9mylUj1uvlO0ofDRnmZ1TMRCFI3csJ3-k8GcNYtaAHvF0vhk57MthMKOBWGyQy1mie_3nPYATpiLRpVnhoMj0yYLBjbkVEngHlLmMoWYzgQQ6WQo_fzWC3d3vkHKEn7dSJeRxZcQ1TqpzP-NgKAKp4YmYDknrdGoXzFVU48dLdVUtNYvjyEkwIF1S57vEuNRjf0zpzasDIt-6bPnP__nS"/>
+<div class="absolute top-3 right-3 bg-black/30 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded">
+                            60 min
+                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-1 bg-purple-50 text-purple-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Mobility</span>
+<span class="px-2 py-1 bg-green-50 text-green-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Beginner</span>
+</div>
+<h3 class="font-bold text-[#44475b] text-lg mb-1 group-hover:text-[var(--primary)] transition-colors">Morning Yoga Flow</h3>
+<p class="text-sm text-[var(--text-secondary)] line-clamp-2 mb-4">Start your day with this energizing yoga routine focused on flexibility and breath.</p>
+<div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+<div class="flex items-center gap-1 text-xs text-gray-400">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>Updated 1w ago</span>
+</div>
+<button class="text-[var(--primary)] font-bold text-sm hover:underline">View Details</button>
+</div>
+</div>
+</article>
+<article class="flex-card flex flex-col overflow-hidden group cursor-pointer">
+<div class="h-40 bg-gradient-to-r from-gray-700 to-gray-900 relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 z-10 backdrop-blur-[1px]">
+<span class="material-symbols-outlined text-white text-5xl drop-shadow-lg">play_circle</span>
+</div>
+<img alt="Workout" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3Jma_oMzQYpoyYytlTa-5jytQ18uTDRiFN6wel0Rdm6rP88n9tHxXRiWeIU_pTcZSz7kNvNq4OSgC9PA5tcDmDv71jaaXCSn01P2YsPOKkGPwf8krccIdi6ADHiSI1QsvmQswLO3TIy7FXgODlJZb2pGT6Md4-bW3Xg7wEX5QRrC1AvvhvApat76_d_2qxVnxRc2UrpV17YzxMdj7fBrCl2RQO_ZsA0TVESU-rgyjCv7STTJxlSUlq7zTzgGWaRUGVuslCGX6p1c1"/>
+<div class="absolute top-3 right-3 bg-black/30 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded">
+                            50 min
+                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Strength</span>
+<span class="px-2 py-1 bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Advanced</span>
+</div>
+<h3 class="font-bold text-[#44475b] text-lg mb-1 group-hover:text-[var(--primary)] transition-colors">Powerlifting 101</h3>
+<p class="text-sm text-[var(--text-secondary)] line-clamp-2 mb-4">Focus on the big three: Squat, Bench, and Deadlift. Low reps, high weight.</p>
+<div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+<div class="flex items-center gap-1 text-xs text-gray-400">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>Updated 2w ago</span>
+</div>
+<button class="text-[var(--primary)] font-bold text-sm hover:underline">View Details</button>
+</div>
+</div>
+</article>
+<article class="flex-card flex flex-col overflow-hidden group cursor-pointer">
+<div class="h-40 bg-gradient-to-r from-orange-400 to-red-500 relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 z-10 backdrop-blur-[1px]">
+<span class="material-symbols-outlined text-white text-5xl drop-shadow-lg">play_circle</span>
+</div>
+<img alt="Workout" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsra5kWR-yVk67CG0o2oZlpM8cWRzr7op3xYr3bU9zl2ckUA_uXVDUTrKb2cVO4ubVRDCYQUkL2D6Hikmphy78W-kfP4akC4WoA7lqlzXzsd6PHrLqOSg4aQYfHfrew6ggVmCn7qXlY8CCt0mujN6GEgCEj0wobkhW1xGo1Ih0OPKp6jyPrJE5dNDqz_yhKHcQmRYrUnNXKJto8Djc3M-8no475ZuSWYO1O0WE1ejZBYRHOxK4UEiVNURXLfwTPUrGW8eNa5qmSYDL"/>
+<div class="absolute top-3 right-3 bg-black/30 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded">
+                            20 min
+                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-1 bg-amber-50 text-amber-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Abs</span>
+<span class="px-2 py-1 bg-green-50 text-green-600 text-[10px] font-bold uppercase tracking-wide rounded-sm">Beginner</span>
+</div>
+<h3 class="font-bold text-[#44475b] text-lg mb-1 group-hover:text-[var(--primary)] transition-colors">Core Crusher</h3>
+<p class="text-sm text-[var(--text-secondary)] line-clamp-2 mb-4">Quick and effective ab workout to build core stability and strength.</p>
+<div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+<div class="flex items-center gap-1 text-xs text-gray-400">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>Updated 3w ago</span>
+</div>
+<button class="text-[var(--primary)] font-bold text-sm hover:underline">View Details</button>
+</div>
+</div>
+</article>
+<article class="flex-card flex flex-col overflow-hidden group cursor-pointer border-2 border-dashed border-gray-300 hover:border-[var(--primary)] flex items-center justify-center min-h-[350px] bg-white transition-colors">
+<div class="text-center p-6">
+<div class="w-16 h-16 bg-[var(--primary)] bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4 text-[var(--primary)]">
+<span class="material-symbols-outlined text-3xl">add</span>
+</div>
+<h3 class="font-bold text-[#44475b] text-lg mb-2">Create Custom</h3>
+<p class="text-sm text-[var(--text-secondary)] mb-6 max-w-[200px] mx-auto">Build a new workout template from scratch to suit your client's needs.</p>
+<button class="text-[var(--primary)] font-bold text-sm hover:underline">Get Started</button>
+</div>
+</article>
+</div>
+<div class="mt-12 flex justify-center">
+<nav class="flex gap-2">
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg bg-[var(--primary)] text-white font-bold shadow-md shadow-emerald-100" href="#">1</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 font-medium transition-colors" href="#">2</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 font-medium transition-colors" href="#">3</a>
+<span class="w-10 h-10 flex items-center justify-center text-gray-400">...</span>
+<a class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-8 text-center border-t border-gray-200 bg-white">
+<div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--primary)]">fitness_center</span>
+<span class="font-bold text-slate-700">FlexHub</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)]">© 2024 FlexHub Gym Management System. Empowering Fitness Entrepreneurs.</p>
+</div>
+</footer>
+
+</body></html>

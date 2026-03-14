@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Trainer Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --groww-primary: #00d09c;
+            --groww-bg: #f8f9fa;
+            --groww-border: #ebedef;
+            --text-main: #44475b;
+            --text-secondary: #7c7e8c;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--groww-bg);
+            color: var(--text-main);
+        }
+        .groww-card {
+            background: #ffffff;
+            border: 1px solid var(--groww-border);
+            border-radius: 8px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill-1 {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input:focus, textarea:focus {
+            --tw-ring-color: var(--groww-primary);
+            border-color: var(--groww-primary);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-[var(--groww-border)] sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-[var(--groww-primary)] rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-bold text-[#44475b]">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-8 text-sm font-semibold text-[var(--text-secondary)]">
+<a class="hover:text-[var(--groww-primary)] transition-colors py-5" href="#">Dashboard</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors py-5" href="#">Schedule</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors py-5" href="#">My Clients</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors py-5" href="#">Library</a>
+<a class="text-[var(--groww-primary)] border-b-2 border-[var(--groww-primary)] py-5" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-[var(--text-secondary)] hover:bg-[var(--groww-bg)] rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-[var(--groww-border)] cursor-pointer">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-[var(--groww-border)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpKeH0Lfuq45ITrxPgIs_I1Q4V_nzdeRe1Ge4utxbgUAthUogaUeRKPdWqSzTNYnud9A1oFhkw7_DGeJLA9sImE4U_SFo7xH7pO8e2BWzgKDA5guyWTb084_-n8eOx-ejER7UXZkF3Qh-BUI0TIAgvty4_3N4d0GOgmw0W2bGPyAWJJCYwClWGzOl9bEs66IPqPB5dnDAaXpX7C-WH9YmlWNwee6pIWWJ0ZqafAmjH1-SyChkg53DNZ2aeBCnYxkxKQQhTGbKYC2q9"/>
+<span class="text-sm font-bold hidden sm:block">Sarah Jenkins</span>
+<span class="material-symbols-outlined text-sm text-[var(--text-secondary)]">expand_more</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-1 max-w-7xl mx-auto px-4 py-10 w-full">
+<div class="mb-8 flex justify-between items-end">
+<div>
+<p class="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-1">Trainer Portal</p>
+<h1 class="text-2xl font-bold text-[#44475b]">My Professional Profile</h1>
+</div>
+<button class="text-sm font-bold text-[var(--groww-primary)] border border-[var(--groww-primary)] px-4 py-2 rounded hover:bg-emerald-50 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">visibility</span>
+            View Public Profile
+        </button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-8 space-y-8">
+<div class="groww-card p-8">
+<div class="flex flex-col sm:flex-row items-start gap-6 pb-8 border-b border-[var(--groww-border)]">
+<div class="relative group">
+<img alt="Trainer" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-[var(--groww-bg)] shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj_J4cBAj5FKp8Ez2g00CIOh0AO7BiY8pSC4L6adxkO6EfaEaQ2lvCRv22YRC6I6j7iZ-zhYHD6lcPHnFqMBZZQpZuNoObT4pjKYFxKGVHxFPHTjyG_pWqUUrgnYfaQAUFijCX1lbydlbg36_lu49J3zLHaG8KKJ_KP-fSTzfEorZxCD6fElrdO2x8__pnngdoLxTvY3xY6ed1san-0tlhNeiPQ6xrUa0FqN_b1A9lcKAbKFb8vY6EvEUiTPY1x_tmn9eYu_HiWIOm"/>
+<button class="absolute bottom-0 right-0 bg-[var(--groww-primary)] text-white p-2 rounded-full shadow-lg hover:opacity-90 transition-opacity border-2 border-white">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div class="flex-1 w-full space-y-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-bold text-[var(--text-secondary)] mb-1 uppercase">Full Name</label>
+<input class="w-full bg-[var(--groww-bg)] border-transparent rounded px-3 py-2 text-[#44475b] font-bold focus:bg-white focus:border-[var(--groww-primary)] focus:ring-0 transition-all" type="text" value="Sarah Jenkins"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-[var(--text-secondary)] mb-1 uppercase">Professional Title</label>
+<input class="w-full bg-[var(--groww-bg)] border-transparent rounded px-3 py-2 text-[#44475b] font-medium focus:bg-white focus:border-[var(--groww-primary)] focus:ring-0 transition-all" type="text" value="Senior Strength Coach"/>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs font-semibold">
+<span class="material-symbols-outlined text-sm">verified</span> Verified Trainer
+                            </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs font-semibold">
+<span class="material-symbols-outlined text-sm">location_on</span> New York, NY
+                            </span>
+</div>
+</div>
+</div>
+<form class="mt-8 space-y-8">
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<label class="text-sm font-bold text-[#44475b]">Biography</label>
+<span class="text-xs text-[var(--text-secondary)]">Max 500 characters</span>
+</div>
+<textarea class="w-full bg-white border border-[var(--groww-border)] rounded-lg p-4 text-sm text-[var(--text-main)] placeholder-gray-400 focus:ring-1 focus:ring-[var(--groww-primary)] focus:border-[var(--groww-primary)] transition-all" rows="5">NASM Certified Personal Trainer with over 8 years of experience helping clients achieve their fitness goals. Specialized in functional strength training, mobility work, and sustainable fat loss. My philosophy is built on consistency, proper form, and enjoying the process. Former collegiate athlete passionate about bringing athletic performance to everyday life.</textarea>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-bold text-[#44475b]">Specialties</label>
+<div class="p-4 bg-[var(--groww-bg)] rounded-lg border border-[var(--groww-border)]">
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="inline-flex items-center gap-1 px-3 py-1.5 bg-white text-[var(--groww-primary)] border border-emerald-100 rounded-md text-sm font-bold shadow-sm">
+                                    Strength Training
+                                    <button class="hover:text-red-500" type="button"><span class="material-symbols-outlined text-sm">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-3 py-1.5 bg-white text-[var(--groww-primary)] border border-emerald-100 rounded-md text-sm font-bold shadow-sm">
+                                    HIIT
+                                    <button class="hover:text-red-500" type="button"><span class="material-symbols-outlined text-sm">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-3 py-1.5 bg-white text-[var(--groww-primary)] border border-emerald-100 rounded-md text-sm font-bold shadow-sm">
+                                    Mobility
+                                    <button class="hover:text-red-500" type="button"><span class="material-symbols-outlined text-sm">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-3 py-1.5 bg-white text-[var(--groww-primary)] border border-emerald-100 rounded-md text-sm font-bold shadow-sm">
+                                    Nutrition Coaching
+                                    <button class="hover:text-red-500" type="button"><span class="material-symbols-outlined text-sm">close</span></button>
+</span>
+</div>
+<div class="flex gap-2">
+<input class="flex-1 bg-white border border-[var(--groww-border)] rounded px-3 py-2 text-sm focus:ring-[var(--groww-primary)] focus:border-[var(--groww-primary)]" placeholder="Add a new specialty..." type="text"/>
+<button class="bg-[#44475b] text-white px-4 py-2 rounded text-sm font-bold hover:opacity-90" type="button">Add</button>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-bold text-[#44475b]">Certifications &amp; Education</label>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-indigo-50 flex items-center justify-center text-indigo-600 shrink-0">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<input class="flex-1 bg-white border border-[var(--groww-border)] rounded px-3 py-2 text-sm text-[var(--text-main)] focus:ring-[var(--groww-primary)] focus:border-[var(--groww-primary)]" type="text" value="B.S. Kinesiology - Penn State University"/>
+<button class="text-gray-400 hover:text-red-500" type="button"><span class="material-symbols-outlined">delete</span></button>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-orange-50 flex items-center justify-center text-orange-600 shrink-0">
+<span class="material-symbols-outlined text-xl">workspace_premium</span>
+</div>
+<input class="flex-1 bg-white border border-[var(--groww-border)] rounded px-3 py-2 text-sm text-[var(--text-main)] focus:ring-[var(--groww-primary)] focus:border-[var(--groww-primary)]" type="text" value="NASM Certified Personal Trainer (CPT)"/>
+<button class="text-gray-400 hover:text-red-500" type="button"><span class="material-symbols-outlined">delete</span></button>
+</div>
+<button class="text-sm font-bold text-[var(--groww-primary)] flex items-center gap-2 hover:underline pl-1" type="button">
+<span class="material-symbols-outlined text-lg">add</span> Add Certification
+                            </button>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-bold text-[#44475b]">Social Media Links</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-xs">IG</span>
+<input class="w-full bg-white border border-[var(--groww-border)] rounded px-3 py-2 pl-10 text-sm focus:ring-[var(--groww-primary)] focus:border-[var(--groww-primary)]" placeholder="@username" type="text" value="@sarah.lifts"/>
+</div>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-xs">LI</span>
+<input class="w-full bg-white border border-[var(--groww-border)] rounded px-3 py-2 pl-10 text-sm focus:ring-[var(--groww-primary)] focus:border-[var(--groww-primary)]" placeholder="LinkedIn URL" type="text" value="linkedin.com/in/sarahjenkins"/>
+</div>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-xs">YT</span>
+<input class="w-full bg-white border border-[var(--groww-border)] rounded px-3 py-2 pl-10 text-sm focus:ring-[var(--groww-primary)] focus:border(--groww-primary)]" placeholder="YouTube Channel" type="text"/>
+</div>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-xs">WEB</span>
+<input class="w-full bg-white border border-[var(--groww-border)] rounded px-3 py-2 pl-10 text-sm focus:ring-[var(--groww-primary)] focus:border-[var(--groww-primary)]" placeholder="Website URL" type="text" value="sarahjenkinsfit.com"/>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-[var(--groww-border)] flex items-center justify-end gap-4">
+<button class="px-6 py-2.5 rounded-lg text-sm font-bold text-[var(--text-secondary)] hover:bg-gray-50 transition-colors" type="button">Discard Changes</button>
+<button class="px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-[var(--groww-primary)] hover:opacity-90 shadow-sm transition-opacity" type="submit">Save Profile</button>
+</div>
+</form>
+</div>
+</div>
+<div class="lg:col-span-4 space-y-6">
+<div class="groww-card p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-[#44475b]">Stats at a Glance</h3>
+<span class="text-xs font-semibold text-[var(--text-secondary)] bg-gray-100 px-2 py-1 rounded">This Month</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-[var(--groww-bg)] rounded-lg border border-[var(--groww-border)] flex flex-col items-center justify-center text-center">
+<div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-[var(--groww-primary)] mb-2">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<p class="text-2xl font-bold text-[#44475b]">28</p>
+<p class="text-xs font-semibold text-[var(--text-secondary)] mt-1">Total Active Clients</p>
+</div>
+<div class="p-4 bg-[var(--groww-bg)] rounded-lg border border-[var(--groww-border)] flex flex-col items-center justify-center text-center">
+<div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 mb-2">
+<span class="material-symbols-outlined fill-1">star</span>
+</div>
+<p class="text-2xl font-bold text-[#44475b]">4.9</p>
+<p class="text-xs font-semibold text-[var(--text-secondary)] mt-1">Average Rating</p>
+</div>
+</div>
+<div class="mt-6 space-y-4">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2 text-[var(--text-secondary)]">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span>Training Hours</span>
+</div>
+<span class="font-bold text-[#44475b]">142 Hrs</span>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-1.5">
+<div class="bg-[var(--groww-primary)] h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2 text-[var(--text-secondary)]">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+<span>Session Completion</span>
+</div>
+<span class="font-bold text-[#44475b]">98%</span>
+</div>
+</div>
+</div>
+<div class="groww-card p-6">
+<h3 class="font-bold text-[#44475b] mb-4">Availability Status</h3>
+<div class="flex items-center justify-between mb-4">
+<div>
+<p class="text-sm font-bold text-[#44475b]">Accepting Clients</p>
+<p class="text-xs text-[var(--text-secondary)]">Visible on gym directory</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[var(--groww-primary)]"></div>
+</label>
+</div>
+<div class="pt-4 border-t border-[var(--groww-border)]">
+<button class="w-full flex items-center justify-center gap-2 text-sm font-bold text-[var(--groww-primary)] hover:bg-emerald-50 py-2 rounded transition-colors">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+                        Manage Schedule
+                    </button>
+</div>
+</div>
+<div class="groww-card p-4 border-l-4 border-orange-400 bg-orange-50">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-orange-500">warning</span>
+<div>
+<p class="text-sm font-bold text-orange-900">CPR Certification Expiring</p>
+<p class="text-xs text-orange-800 mt-1">Your certification expires in 14 days. Please upload renewal proof.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-10 text-center border-t border-[var(--groww-border)] bg-white">
+<div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--groww-primary)]">fitness_center</span>
+<span class="font-bold text-slate-700">FlexHub</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)]">© 2024 FlexHub Gym Management System. Empowering Fitness Entrepreneurs.</p>
+</div>
+</footer>
+
+</body></html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Workout Template Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #00d09c;
+            --primary-dark: #00b88a;
+            --bg-gradient-start: #f0fdfa;
+            --bg-gradient-end: #ecfdf5;
+            --text-main: #44475b;
+            --text-secondary: #7c7e8c;
+            --card-border: #f3f4f6;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-main);
+        }
+        .flex-card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+        }
+        .exercise-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .exercise-card:hover {
+            border-color: var(--primary);
+            background: #f0fdfa;
+        }
+        .exercise-card.active {
+            border-color: var(--primary);
+            background: #f0fdfa;
+            box-shadow: 0 4px 12px rgba(0, 208, 156, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .nav-tab {
+            @apply px-6 py-3 text-sm font-semibold border-b-2 transition-all;
+        }
+        .nav-tab.active {
+            @apply border-[var(--primary)] text-[var(--primary)];
+        }
+        .nav-tab.inactive {
+            @apply border-transparent text-gray-400 hover:text-gray-600;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-bold text-[#44475b]">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-1 text-sm font-semibold text-[var(--text-secondary)]">
+<a class="px-3 py-2 hover:text-[var(--primary)] transition-colors" href="#">Dashboard</a>
+<a class="px-3 py-2 hover:text-[var(--primary)] transition-colors" href="#">Schedule</a>
+<a class="px-3 py-2 hover:text-[var(--primary)] transition-colors" href="#">My Clients</a>
+<a class="px-3 py-2 text-[var(--primary)] relative transition-colors" href="#">
+                    Library
+                    <span class="absolute bottom-[-18px] left-0 w-full h-0.5 bg-[var(--primary)] rounded-full"></span>
+</a>
+<a class="px-3 py-2 hover:text-[var(--primary)] transition-colors" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-gray-50 border-0 rounded-full text-sm w-64 focus:ring-2 focus:ring-[var(--primary)] placeholder-gray-400" placeholder="Search library..." type="text"/>
+</div>
+<button class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-sm border-2 border-white shadow-sm cursor-pointer">
+                JD
+            </div>
+</div>
+</div>
+</nav>
+<header class="max-w-[1440px] mx-auto w-full px-6 pt-8">
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+<div class="space-y-4">
+<a class="flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                Back to Library
+            </a>
+<div class="flex flex-wrap items-center gap-4">
+<h1 class="text-3xl font-extrabold text-[#44475b]">Full Body Blast</h1>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wide rounded-full border border-blue-100">Strength</span>
+<span class="px-3 py-1 bg-orange-50 text-orange-600 text-xs font-bold uppercase tracking-wide rounded-full border border-orange-100">Intermediate</span>
+</div>
+<div class="flex items-center gap-2 text-gray-500 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">timer</span>
+                    45 min
+                </div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<button class="flex items-center justify-center gap-2 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-8 py-3.5 rounded-xl font-bold text-base shadow-lg shadow-emerald-100 transition-all">
+<span class="material-symbols-outlined text-xl">person_add</span>
+                Assign to Client
+            </button>
+<button class="flex items-center justify-center gap-2 bg-white border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-emerald-50 px-8 py-3 rounded-xl font-bold text-base transition-all">
+<span class="material-symbols-outlined text-xl">edit</span>
+                Modify template
+            </button>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto w-full px-6 py-8 flex flex-col lg:flex-row gap-8">
+<aside class="w-full lg:w-[380px] space-y-4">
+<h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest px-1">Exercise List (6)</h3>
+<div class="space-y-3">
+<div class="flex-card exercise-card active p-3 flex gap-4">
+<div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Squat" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHOe7aCLz7gxR8eKISPvzOMz-1PLhhJxWrYt-uYW5aaX8MdRPxjM2X4QyiGkS4Qyn-xilJZtWI2JffjNAavYJvb15nhu3xtja7yjLTJ63sbT_670xGfER1Ve3HiJJLiz1lqi73Q8nQMIji7QhIfE2jZSuWFi6_YWf8-42ccX6VD0alNZXR814fHfXLxez_tW9ZTHrAN9LezKw5Hhxmsw0ZJy0JJrLh5aFnW1CNg1YNIMu0S0oTysOx60qRAxynWjKHBjwKLk7cxZVD"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-[#44475b] text-sm leading-tight">Barbell Back Squat</h4>
+<p class="text-xs text-[var(--text-secondary)] mt-1">Quadriceps, Glutes</p>
+</div>
+<div class="ml-auto flex items-center">
+<span class="material-symbols-outlined text-[var(--primary)]">play_circle</span>
+</div>
+</div>
+<div class="flex-card exercise-card p-3 flex gap-4">
+<div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Bench" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3Jma_oMzQYpoyYytlTa-5jytQ18uTDRiFN6wel0Rdm6rP88n9tHxXRiWeIU_pTcZSz7kNvNq4OSgC9PA5tcDmDv71jaaXCSn01P2YsPOKkGPwf8krccIdi6ADHiSI1QsvmQswLO3TIy7FXgODlJZb2pGT6Md4-bW3Xg7wEX5QRrC1AvvhvApat76_d_2qxVnxRc2UrpV17YzxMdj7fBrCl2RQO_ZsA0TVESU-rgyjCv7STTJxlSUlq7zTzgGWaRUGVuslCGX6p1c1"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-[#44475b] text-sm leading-tight">Dumbbell Bench Press</h4>
+<p class="text-xs text-[var(--text-secondary)] mt-1">Chest, Triceps</p>
+</div>
+</div>
+<div class="flex-card exercise-card p-3 flex gap-4">
+<div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Row" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRHU1AuqKVRjhjMfXpsOn1jckBTfSy6HB7mYRfTylE7etHt-PYCYIFUvYXWaZ2f7StAcxTN8wh--uq1PJea4LCNqlU41t0F0zJy1v2bh_SxXvuQ9AD7MufIWDjhrpiGa-28W_Nba2HPv1_xSoMc4yb6vLAByGf1ecgmiIr9D-ny2rzIm2MM8D77gHTsvyRcFMUzl4h9FNC8e9cgSNps64ZiXOsZZhszTrfFqpdY-Jl94RzJT-MScGluMFhcGQBftXc0VkhgEtrcJ3i"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-[#44475b] text-sm leading-tight">Bent Over Rows</h4>
+<p class="text-xs text-[var(--text-secondary)] mt-1">Back, Biceps</p>
+</div>
+</div>
+<div class="flex-card exercise-card p-3 flex gap-4">
+<div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Shoulders" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ZTTPcbAK_rumVkIgce2FMZytGGlHNh4t-wT8pJ3znbCaiBBtkYceFwS9mylUj1uvlO0ofDRnmZ1TMRCFI3csJ3-k8GcNYtaAHvF0vhk57MthMKOBWGyQy1mie_3nPYATpiLRpVnhoMj0yYLBjbkVEngHlLmMoWYzgQQ6WQo_fzWC3d3vkHKEn7dSJeRxZcQ1TqpzP-NgKAKp4YmYDknrdGoXzFVU48dLdVUtNYvjyEkwIF1S57vEuNRjf0zpzasDIt-6bPnP__nS"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-[#44475b] text-sm leading-tight">Overhead Press</h4>
+<p class="text-xs text-[var(--text-secondary)] mt-1">Shoulders</p>
+</div>
+</div>
+<div class="flex-card exercise-card p-3 flex gap-4">
+<div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Core" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsra5kWR-yVk67CG0o2oZlpM8cWRzr7op3xYr3bU9zl2ckUA_uXVDUTrKb2cVO4ubVRDCYQUkL2D6Hikmphy78W-kfP4akC4WoA7lqlzXzsd6PHrLqOSg4aQYfHfrew6ggVmCn7qXlY8CCt0mujN6GEgCEj0wobkhW1xGo1Ih0OPKp6jyPrJE5dNDqz_yhKHcQmRYrUnNXKJto8Djc3M-8no475ZuSWYO1O0WE1ejZBYRHOxK4UEiVNURXLfwTPUrGW8eNa5qmSYDL"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-[#44475b] text-sm leading-tight">Plank to Pike</h4>
+<p class="text-xs text-[var(--text-secondary)] mt-1">Abs, Core</p>
+</div>
+</div>
+</div>
+</aside>
+<div class="flex-1 space-y-6">
+<div class="flex-card overflow-hidden">
+<div class="aspect-video bg-black relative flex items-center justify-center">
+<img alt="Video Placeholder" class="absolute inset-0 w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHOe7aCLz7gxR8eKISPvzOMz-1PLhhJxWrYt-uYW5aaX8MdRPxjM2X4QyiGkS4Qyn-xilJZtWI2JffjNAavYJvb15nhu3xtja7yjLTJ63sbT_670xGfER1Ve3HiJJLiz1lqi73Q8nQMIji7QhIfE2jZSuWFi6_YWf8-42ccX6VD0alNZXR814fHfXLxez_tW9ZTHrAN9LezKw5Hhxmsw0ZJy0JJrLh5aFnW1CNg1YNIMu0S0oTysOx60qRAxynWjKHBjwKLk7cxZVD"/>
+<button class="relative z-10 w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-5xl fill-1">play_arrow</span>
+</button>
+<div class="absolute bottom-6 left-6 text-white z-10">
+<h2 class="text-xl font-bold">Barbell Back Squat</h2>
+<p class="text-sm opacity-80">Proper Form Demonstration</p>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+</div>
+<div class="border-b border-gray-100 flex px-6 overflow-x-auto">
+<button class="nav-tab active">Instructions</button>
+<button class="nav-tab inactive">Prescription</button>
+<button class="nav-tab inactive">Trainer Tips</button>
+</div>
+<div class="p-8">
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<h4 class="font-bold text-[#44475b] flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-emerald-50 text-[var(--primary)] text-xs flex items-center justify-center border border-emerald-100">1</span>
+                                Setup
+                            </h4>
+<p class="text-sm text-[var(--text-secondary)] leading-relaxed">Position the barbell at mid-upper chest height on the rack. Step under the bar and rest it across your trapezius muscles.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-[#44475b] flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-emerald-50 text-[var(--primary)] text-xs flex items-center justify-center border border-emerald-100">2</span>
+                                The Descent
+                            </h4>
+<p class="text-sm text-[var(--text-secondary)] leading-relaxed">Inhale, brace your core, and initiate the movement by hinging at your hips and bending your knees simultaneously.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-[#44475b] flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-emerald-50 text-[var(--primary)] text-xs flex items-center justify-center border border-emerald-100">3</span>
+                                Depth
+                            </h4>
+<p class="text-sm text-[var(--text-secondary)] leading-relaxed">Lower until your thighs are at least parallel to the floor, ensuring your heels stay grounded and knees track over toes.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-[#44475b] flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-emerald-50 text-[var(--primary)] text-xs flex items-center justify-center border border-emerald-100">4</span>
+                                The Ascent
+                            </h4>
+<p class="text-sm text-[var(--text-secondary)] leading-relaxed">Exhale as you drive through your mid-foot to return to the starting position, keeping your chest up and spine neutral.</p>
+</div>
+</div>
+<div class="pt-6 border-t border-gray-100">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Prescription</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="bg-gray-50 rounded-xl p-4 text-center">
+<p class="text-[var(--text-secondary)] text-xs mb-1">Sets</p>
+<p class="text-xl font-extrabold text-[#44475b]">4</p>
+</div>
+<div class="bg-gray-50 rounded-xl p-4 text-center">
+<p class="text-[var(--text-secondary)] text-xs mb-1">Reps</p>
+<p class="text-xl font-extrabold text-[#44475b]">8-12</p>
+</div>
+<div class="bg-gray-50 rounded-xl p-4 text-center">
+<p class="text-[var(--text-secondary)] text-xs mb-1">Rest</p>
+<p class="text-xl font-extrabold text-[#44475b]">90s</p>
+</div>
+<div class="bg-gray-50 rounded-xl p-4 text-center">
+<p class="text-[var(--text-secondary)] text-xs mb-1">Tempo</p>
+<p class="text-xl font-extrabold text-[#44475b]">3-1-1-0</p>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-gray-100">
+<h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Trainer Tips</h4>
+<div class="bg-emerald-50 border border-emerald-100 rounded-xl p-4 flex gap-4">
+<span class="material-symbols-outlined text-[var(--primary)]">tips_and_updates</span>
+<p class="text-sm text-emerald-800 font-medium">Maintain a neutral spine throughout the descent. If your heels lift, consider widening your stance or working on ankle mobility.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="w-full lg:w-[320px] space-y-6">
+<div class="flex-card p-6 shadow-sm">
+<h3 class="font-extrabold text-[#44475b] text-lg mb-6">Workout Summary</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-500">
+<span class="material-symbols-outlined">weight</span>
+</div>
+<div>
+<p class="text-xs text-[var(--text-secondary)] font-bold uppercase tracking-wider">Total Volume</p>
+<p class="text-lg font-extrabold text-[#44475b]">12,450 kg</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500">
+<span class="material-symbols-outlined">local_fire_department</span>
+</div>
+<div>
+<p class="text-xs text-[var(--text-secondary)] font-bold uppercase tracking-wider">Est. Calories</p>
+<p class="text-lg font-extrabold text-[#44475b]">450 - 600 kcal</p>
+</div>
+</div>
+<div class="pt-6 border-t border-gray-100">
+<p class="text-xs text-[var(--text-secondary)] font-bold uppercase tracking-wider mb-4">Recommended Equipment</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-gray-600 rounded-lg text-xs font-bold">Barbell</span>
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-gray-600 rounded-lg text-xs font-bold">Dumbbells</span>
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-gray-600 rounded-lg text-xs font-bold">Adjustable Bench</span>
+<span class="px-3 py-1.5 bg-gray-50 border border-gray-100 text-gray-600 rounded-lg text-xs font-bold">Squat Rack</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-card p-6 border-none overflow-hidden relative group">
+<div class="relative z-10 text-center">
+<button class="w-full text-[var(--primary)] font-extrabold py-3 rounded-xl hover:bg-emerald-50 transition-colors border-2 border-emerald-50">
+                    Duplicate Template
+                </button>
+</div>
+</div>
+</aside>
+</main>
+<footer class="mt-auto py-8 text-center border-t border-gray-200 bg-white">
+<div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--primary)]">fitness_center</span>
+<span class="font-bold text-slate-700">FlexHub</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)]">© 2024 FlexHub Gym Management System. Empowering Fitness Entrepreneurs.</p>
+</div>
+</footer>
+
+</body></html>

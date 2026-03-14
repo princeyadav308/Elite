@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Workout Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0df280",
+                        "background-light": "#f5f8f7",
+                        "background-dark": "#102219",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1A2C22",
+                        "border-light": "#cee8db",
+                        "border-dark": "#2a4034",
+                        "text-main": "#0d1c14",
+                        "text-light": "#f0f4f2",
+                        "text-muted": "#499c73",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cee8db;
+            border-radius: 20px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #2a4034;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-text-light flex flex-col min-h-screen overflow-x-hidden selection:bg-primary selection:text-text-main">
+<header class="sticky top-0 z-50 flex items-center border-b border-solid border-border-light dark:border-border-dark bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-md px-4 lg:px-8 py-3">
+<div class="flex items-center gap-3 mr-8 shrink-0">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">FlexHub</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Schedule</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">My Clients</a>
+<a class="text-sm font-medium leading-normal text-primary border-b-2 border-primary py-1" href="#">Library</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Profile</a>
+</nav>
+<div class="flex flex-1 justify-end items-center gap-4 lg:gap-6">
+<div class="relative hidden sm:block max-w-xs w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-lg">search</span>
+<input class="w-full h-9 pl-10 pr-4 rounded-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-xs focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="Search everything..."/>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden lg:flex flex-col items-end">
+<p class="text-xs font-bold leading-none">Alex Rivers</p>
+<p class="text-[10px] text-text-muted font-medium">Head Trainer</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 ring-2 ring-primary/20 border border-border-light dark:border-border-dark cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDloIAHEW9cbQlq5zWraktmY7WruvBE7a13z4_hPj81B9e0pOazjbmPu1KQPNVPMpCng68_zSDVkBkx4hRZYdNU52kxmxxfnvkq_jx6yDmI9KiMpnPvgeCTxC5HcPr2itb9oj30CqmWHzrFYwVFI8bYC2fHJd7OF0gPDFUW850ytkbtywsocQVNZXcWnsLwsQpxefr8bFLx9bc2_p3SXK8X3qM-dVkpCjTu-aA2UySkqTc8hTnI8y6GTc9BfWUnKWcEUzEZbD4ys02i");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-[1600px] mx-auto p-4 md:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<section class="lg:col-span-3 flex flex-col gap-6">
+<h1 class="text-2xl lg:text-3xl font-bold tracking-tight px-1">Custom Builder</h1>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 shadow-sm border border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">edit_document</span>
+<h3 class="font-bold text-lg">Workout Details</h3>
+</div>
+<div class="flex flex-col gap-5">
+<label class="flex flex-col w-full">
+<p class="text-sm font-medium leading-normal pb-2 text-text-main dark:text-gray-300">Workout Name</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-main dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 placeholder:text-text-muted px-4 text-sm font-normal leading-normal transition-all" placeholder="e.g., Full Body Blast" value="Summer Shred Day 1"/>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-sm font-medium leading-normal pb-2 text-text-main dark:text-gray-300">Category</p>
+<div class="relative">
+<select class="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-main dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 px-4 pr-10 text-sm font-normal leading-normal appearance-none">
+<option value="strength">Strength Training</option>
+<option value="hiit">HIIT</option>
+<option value="cardio">Cardio</option>
+<option value="flexibility">Flexibility</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-xl">expand_more</span>
+</div>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-sm font-medium leading-normal pb-2 text-text-main dark:text-gray-300">Difficulty</p>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-3 rounded-lg border border-primary bg-primary/10 text-primary text-sm font-bold">Beginner</button>
+<button class="flex-1 py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-muted text-sm font-medium hover:border-primary/50">Inter</button>
+<button class="flex-1 py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-muted text-sm font-medium hover:border-primary/50">Adv</button>
+</div>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-sm font-medium leading-normal pb-2 text-text-main dark:text-gray-300">Description</p>
+<textarea class="form-textarea flex w-full min-w-0 flex-1 resize-none rounded-lg text-text-main dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-24 placeholder:text-text-muted p-3 text-sm font-normal leading-normal" placeholder="Add notes for the client..."></textarea>
+</label>
+</div>
+</div>
+<div class="hidden lg:block bg-cover bg-center rounded-xl overflow-hidden shadow-sm relative h-48 group cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGjf8PkigBrAsRKgWBnv3Aj6g1eeNZZvnSfAi-LYwDnRd-ACA4095fnvCVljgb_GzDAYgy3krApp3eh5-Jhqs3qX5hfT8wXEo-hfv8xs_xdDeJTaTChsvI2JP8DEFD7qN4WAqLThP3_vEbu4bomTcKPOIbnml8AaMRiV5nPB452jOBQhRh8fvigDZhXY4Y-kyq_KMsPKDUywbMXnCDCyffawVlPUf06PX7dl5kapxLVigUmmy6bYN_pU9ap7arobfb2s7HvKz7HEHd");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-5 w-full">
+<p class="text-white text-xs font-bold uppercase tracking-wider mb-1 text-primary">Preview</p>
+<p class="text-white font-bold text-lg leading-tight">Summer Shred Day 1</p>
+<div class="flex items-center gap-3 mt-2 text-gray-300 text-xs font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">timer</span> 45m</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">fitness_center</span> 12 Exercises</span>
+</div>
+</div>
+</div>
+</section>
+<section class="lg:col-span-6 flex flex-col h-full">
+<div class="flex items-end justify-between mb-6 px-1">
+<div>
+<h2 class="text-xl font-bold flex items-center gap-2">Sequence <span class="bg-primary/20 text-primary text-xs px-2 py-0.5 rounded-full">Draft</span></h2>
+<p class="text-sm text-text-muted mt-1">Drag and drop to reorder exercises.</p>
+</div>
+<div class="flex items-center gap-2 text-sm font-medium text-text-main dark:text-text-light bg-surface-light dark:bg-surface-dark px-3 py-1.5 rounded-lg border border-border-light dark:border-border-dark shadow-sm">
+<span class="material-symbols-outlined text-primary">timer</span>
+<span>Total: ~45 min</span>
+</div>
+</div>
+<div class="flex flex-col gap-4 pb-20">
+<div class="group relative bg-surface-light dark:bg-surface-dark rounded-xl p-4 shadow-sm border border-border-light dark:border-border-dark hover:border-primary/50 transition-all cursor-grab active:cursor-grabbing">
+<div class="absolute left-2 top-1/2 -translate-y-1/2 text-border-light dark:text-border-dark group-hover:text-primary/50">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 pl-6">
+<div class="w-full sm:w-24 h-24 shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-hidden relative">
+<div class="absolute inset-0 flex items-center justify-center text-text-muted bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8vlU5rWNiZZuGIKD1yYGy-K0feCyBtkETTfvUnxE_wrARw046hj_qwEDytoLI-L9YO-1JlLFjPQHzxlDEjKQQ01hCabhEYF3l13rkFrLRUMGc2ingTvpqw92Y3vDoJt5ZNlGMLe2wMZ2NnRGUYMt_jqBJGO37ND7PUOoQ2f8GSr5JITGp_FrxcyvCNG6WZrdDAiRK1Isme0c_8pyXInTycxug6JLnHgTSHr5VqxeK02JRWOOsTlCvwS_Pn3YTbXAFwV8-omjr5Imc');"></div>
+<div class="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1.5 rounded">GIF</div>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-base text-text-main dark:text-white">Barbell Back Squat</h4>
+<p class="text-xs text-text-muted">Legs • Compound</p>
+</div>
+<button class="text-text-muted hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-3 mt-3">
+<div class="flex flex-col gap-1 w-20">
+<label class="text-[10px] font-bold uppercase text-text-muted tracking-wider">Sets</label>
+<input class="h-9 w-full rounded bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-center text-sm font-medium focus:ring-1 focus:ring-primary focus:border-primary" type="text" value="4"/>
+</div>
+<span class="text-text-muted mt-4">×</span>
+<div class="flex flex-col gap-1 w-20">
+<label class="text-[10px] font-bold uppercase text-text-muted tracking-wider">Reps</label>
+<input class="h-9 w-full rounded bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-center text-sm font-medium focus:ring-1 focus:ring-primary focus:border-primary" type="text" value="10-12"/>
+</div>
+<div class="w-px h-8 bg-border-light dark:bg-border-dark mx-2 mt-4 hidden sm:block"></div>
+<div class="flex flex-col gap-1 w-24">
+<label class="text-[10px] font-bold uppercase text-text-muted tracking-wider">Rest (s)</label>
+<div class="relative">
+<input class="h-9 w-full rounded bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark pl-3 pr-8 text-sm font-medium focus:ring-1 focus:ring-primary focus:border-primary" type="text" value="90"/>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-text-muted">s</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-light dark:bg-surface-dark rounded-xl p-4 shadow-sm border border-border-light dark:border-border-dark hover:border-primary/50 transition-all cursor-grab active:cursor-grabbing">
+<div class="absolute left-2 top-1/2 -translate-y-1/2 text-border-light dark:text-border-dark group-hover:text-primary/50">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 pl-6">
+<div class="w-full sm:w-24 h-24 shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 overflow-hidden relative">
+<div class="absolute inset-0 flex items-center justify-center text-text-muted bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvcQQbsjAPZ3uqBOZlBaXc1_2ZQz4D4Cg6N0k3lHBmtGbUa-L99r3FqchHeqw8h21CFh7czTHZiOd6YG-U2IG0E3--w2dr3iQ7UPaU6mbCQhnPCgS4iQGDYFAKWcK1G8j3LlL7rrJoWXv529m4CCsPuGRc3Xj8CVV7SkUVvuS1AE5Q2n7OUxyzA-CPoY3DBWF-yag2ehGw1RPr1gw837khzMt73TN2ls8SOE_BEYA8G8vzZ6Sqtd_yqg9KV6uw_BfWa5nZe19-uvJ9');"></div>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-base text-text-main dark:text-white">Bench Press</h4>
+<p class="text-xs text-text-muted">Chest • Compound</p>
+</div>
+<button class="text-text-muted hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-3 mt-3">
+<div class="flex flex-col gap-1 w-20">
+<label class="text-[10px] font-bold uppercase text-text-muted tracking-wider">Sets</label>
+<input class="h-9 w-full rounded bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-center text-sm font-medium focus:ring-1 focus:ring-primary focus:border-primary" type="text" value="3"/>
+</div>
+<span class="text-text-muted mt-4">×</span>
+<div class="flex flex-col gap-1 w-20">
+<label class="text-[10px] font-bold uppercase text-text-muted tracking-wider">Reps</label>
+<input class="h-9 w-full rounded bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-center text-sm font-medium focus:ring-1 focus:ring-primary focus:border-primary" type="text" value="8"/>
+</div>
+<div class="w-px h-8 bg-border-light dark:bg-border-dark mx-2 mt-4 hidden sm:block"></div>
+<div class="flex flex-col gap-1 w-24">
+<label class="text-[10px] font-bold uppercase text-text-muted tracking-wider">Rest (s)</label>
+<div class="relative">
+<input class="h-9 w-full rounded bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark pl-3 pr-8 text-sm font-medium focus:ring-1 focus:ring-primary focus:border-primary" type="text" value="60"/>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-text-muted">s</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-2 border-dashed border-border-light dark:border-border-dark rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-surface-light/50 transition-colors cursor-pointer min-h-[160px]">
+<div class="bg-primary/10 rounded-full p-4 mb-3">
+<span class="material-symbols-outlined text-primary text-3xl">add</span>
+</div>
+<h3 class="font-medium text-text-main dark:text-white">Add Next Exercise</h3>
+<p class="text-sm text-text-muted mt-1 max-w-xs">Drag exercises from the sidebar or click here to browse the full database.</p>
+</div>
+<div class="sticky bottom-4 z-10 mt-4 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur p-4 rounded-xl border border-border-light dark:border-border-dark shadow-lg flex items-center justify-between">
+<div class="hidden sm:block">
+<p class="text-sm font-medium text-text-main dark:text-white">Ready to assign?</p>
+<p class="text-xs text-text-muted">This workout will be saved to your library.</p>
+</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-6 h-12 rounded-lg border border-border-light dark:border-border-dark bg-transparent text-text-main dark:text-white font-bold text-sm hover:bg-background-light dark:hover:bg-background-dark transition-colors">
+                        Save Draft
+                    </button>
+<button class="flex-1 sm:flex-none px-6 h-12 rounded-lg bg-primary text-text-main font-bold text-sm hover:brightness-105 transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2">
+<span>Assign to Member</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<aside class="hidden lg:flex lg:col-span-3 flex-col gap-4 h-[calc(100vh-120px)] sticky top-24">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark flex flex-col h-full overflow-hidden">
+<div class="p-4 border-b border-border-light dark:border-border-dark">
+<h3 class="font-bold text-lg mb-3">Quick Add</h3>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-sm focus:outline-none focus:border-primary" placeholder="Search exercises..."/>
+</div>
+<div class="flex gap-2 mt-3 overflow-x-auto pb-1 no-scrollbar">
+<button class="whitespace-nowrap px-3 py-1 rounded-full bg-primary text-text-main text-xs font-bold">All</button>
+<button class="whitespace-nowrap px-3 py-1 rounded-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-text-muted text-xs font-medium hover:border-primary">Chest</button>
+<button class="whitespace-nowrap px-3 py-1 rounded-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-text-muted text-xs font-medium hover:border-primary">Legs</button>
+<button class="whitespace-nowrap px-3 py-1 rounded-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-text-muted text-xs font-medium hover:border-primary">Back</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-2">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-[#23352b] group cursor-pointer transition-colors border border-transparent hover:border-border-light dark:hover:border-border-dark">
+<div class="w-12 h-12 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzpZMhmuij7h-1wX7G-J-JtdId_pyMDjXTZGvZryU1aV-6urihNB-1_OCt26MUv4Vo-jtXptCuWDRVKZRf5D5XHTsfxJhOW5c_TdePb25umX11ltpleUCkKh0cP5Aq8_7d0VFFlLJkjMSZY23veVypu2HHSit3BNMSCv0ZxP0rjpgko5TnUksW8JyGaOwp9PD1_i4JdL-mewGSRXmYtXcuSwXgByi9CPPpoabCmbH1wG18DMClIB_KDqwEolha54SiV0aC20avyEHK');"></div>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-sm text-text-main dark:text-white truncate">Push Ups</p>
+<p class="text-xs text-text-muted truncate">Chest • Bodyweight</p>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-text-main transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-[#23352b] group cursor-pointer transition-colors border border-transparent hover:border-border-light dark:hover:border-border-dark">
+<div class="w-12 h-12 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6V0bJZZ2x0qiq3ugpNezBWDzZdlw1K-IjYXTAc2u_sYjYlJIp82qzsCEqJi9xHbDgkl6kix_mswDA22PWk0qVefVXLjAfqyi1OmKkKcH6rnmEKIjIGjk0lEwHQlznFvw_LvAGTW6tPsHL0UzgjmsBaGCThnjABaY2oRdk5D6nDtKy0WmmE9gziX1q3wT3nWthVdMx5HvcfENLniMC993PXEHInQAdPnLjIZnYwyhbxpNsP7h8aKvPt03oRjvH7ynDeHoTH_4_wcPk');"></div>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-sm text-text-main dark:text-white truncate">Romanian Deadlift</p>
+<p class="text-xs text-text-muted truncate">Legs • Barbell</p>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-text-main transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-[#23352b] group cursor-pointer transition-colors border border-transparent hover:border-border-light dark:hover:border-border-dark">
+<div class="w-12 h-12 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCycIy6CWt3rLeOGxA896c0YyYv8V4xtXEnsooZo4tawTwIsD5z9DHIzXvfnQYV4CGv77JeqdiH10RotqlulXI1UfBA_4LHUvVefl1rJHEelBPcXxSMvfuv-sWGdySKa5P2AOKw1VUbteY1xXt5QpUk9wVDlVrCKCbYaS6aYkBRw2VJ4r4YpyIsuNPbKU0cb0f53yAoyxC0liIpAxd62ry5w7QVxbgErw9rurxmXE1Z17AJBzVDIQWzcraNYGYJuS1kTSi-sq9yeQoN');"></div>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-sm text-text-main dark:text-white truncate">Shoulder Press</p>
+<p class="text-xs text-text-muted truncate">Shoulders • Dumbbell</p>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-text-main transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-[#23352b] group cursor-pointer transition-colors border border-transparent hover:border-border-light dark:hover:border-border-dark">
+<div class="w-12 h-12 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAnSMCQJUySjF72pUS-7cn3pvIWnNBX-jniVhzUUD2hpVoszwO3ixWY3tWksbX1gxnlMd9mrLChZmB8wsav7gW0piPVXsh9xwtdchDfgr5OqZDugIMR30T4ZbJZHUhSzejsY8S80CvqE4u0pqhyraoNLOkgDm1cEMkIdmBQSB1zzOklq4KpaVeRmUBTbRJcpQDhNhI6FlbqWJct-dlm2U_pjH_FfSM21G1VpykRlNJA7KSgCK6wWuyxxYbQrUXvqq7QPSRtyfI4V_Zn');"></div>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-sm text-text-main dark:text-white truncate">Walking Lunge</p>
+<p class="text-xs text-text-muted truncate">Legs • Bodyweight</p>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-text-main transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-background-light dark:hover:bg-[#23352b] group cursor-pointer transition-colors border border-transparent hover:border-border-light dark:hover:border-border-dark">
+<div class="w-12 h-12 rounded bg-gray-200 dark:bg-gray-700 bg-cover bg-center shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDxaZa612xPwqY-C5XoSL49dsedjpTPC-w-grpOUJZEu0Fggx-2b6P03WPFMJ92fX92XCoTfzX2hc04Riqb9Asps85YyHie8fEUOmrnXiZ723Kd_UFTaCosFfqBhn1GkBjdbkmKzYQ9iK5XkhcTu12PA6e9T665QaXbj5Sc97HZdKyN3n7jl0fwayRP4-Q4B43pcmiHunGmsh5VLDaYdV0nGXYG4SbR9WWouHZNPkaV9LKjBQoYOkNmXRTFhVkZ0ai0YL3TSZSzvo5O');"></div>
+<div class="flex-1 min-w-0">
+<p class="font-bold text-sm text-text-main dark:text-white truncate">Pull Up</p>
+<p class="text-xs text-text-muted truncate">Back • Bodyweight</p>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-text-main transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+</main>
+
+</body></html>

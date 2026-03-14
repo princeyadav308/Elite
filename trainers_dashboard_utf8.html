@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Trainer Insights Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --groww-primary: #00d09c;
+            --groww-bg: #f8f9fa;
+            --groww-border: #ebedef;
+            --text-main: #44475b;
+            --text-secondary: #7c7e8c;
+            --emerald-soft: #ecfdf5;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top right, var(--emerald-soft), transparent), var(--groww-bg);
+            color: var(--text-main);
+        }
+        .groww-card {
+            background: #ffffff;
+            border: 1px solid var(--groww-border);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill-1 {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-[var(--groww-border)] sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-[var(--groww-primary)] rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-bold text-[#44475b]">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-8 text-sm font-semibold text-[var(--text-secondary)] h-16">
+<a class="text-[var(--groww-primary)] border-b-2 border-[var(--groww-primary)] h-full flex items-center" href="#">Dashboard</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors h-full flex items-center" href="#">Schedule</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors h-full flex items-center" href="#">My Clients</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors h-full flex items-center" href="#">Library</a>
+<a class="hover:text-[var(--groww-primary)] transition-colors h-full flex items-center" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-[var(--text-secondary)] hover:bg-[var(--groww-bg)] rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-[var(--groww-border)]">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-[var(--groww-border)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpKeH0Lfuq45ITrxPgIs_I1Q4V_nzdeRe1Ge4utxbgUAthUogaUeRKPdWqSzTNYnud9A1oFhkw7_DGeJLA9sImE4U_SFo7xH7pO8e2BWzgKDA5guyWTb084_-n8eOx-ejER7UXZkF3Qh-BUI0TIAgvty4_3N4d0GOgmw0W2bGPyAWJJCYwClWGzOl9bEs66IPqPB5dnDAaXpX7C-WH9YmlWNwee6pIWWJ0ZqafAmjH1-SyChkg53DNZ2aeBCnYxkxKQQhTGbKYC2q9"/>
+<span class="text-sm font-bold hidden sm:block text-[#44475b]">Sarah Jenkins</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-1 max-w-7xl mx-auto px-4 py-8 w-full">
+<div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl font-extrabold text-[#44475b]">Trainer Insights</h1>
+<p class="text-[var(--text-secondary)] text-sm">Welcome back, Sarah. Here's your performance overview.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-white border border-[var(--groww-border)] px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined text-lg text-[var(--text-secondary)]">calendar_today</span>
+                Today: Oct 24, 2024
+            </button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="groww-card p-6 flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Active Clients</span>
+<div class="p-2 bg-emerald-50 text-[var(--groww-primary)] rounded-lg">
+<span class="material-symbols-outlined text-xl">groups</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-[#44475b]">28</span>
+<span class="text-xs font-bold text-emerald-500">+12%</span>
+</div>
+</div>
+<div class="groww-card p-6 flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Sessions Today</span>
+<div class="p-2 bg-blue-50 text-blue-500 rounded-lg">
+<span class="material-symbols-outlined text-xl">event_available</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-[#44475b]">6</span>
+<span class="text-xs font-bold text-[var(--text-secondary)]">2 completed</span>
+</div>
+</div>
+<div class="groww-card p-6 flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weekly Revenue</span>
+<div class="p-2 bg-amber-50 text-amber-500 rounded-lg">
+<span class="material-symbols-outlined text-xl">payments</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-[#44475b]">$2,450</span>
+<span class="text-xs font-bold text-emerald-500">+$180</span>
+</div>
+</div>
+<div class="groww-card p-6 flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Avg Client Progress</span>
+<div class="p-2 bg-purple-50 text-purple-500 rounded-lg">
+<span class="material-symbols-outlined text-xl">trending_up</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-[#44475b]">74%</span>
+<span class="text-xs font-bold text-emerald-500">Good</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-8 space-y-8">
+<div class="groww-card overflow-hidden">
+<div class="p-6 border-b border-[var(--groww-border)] flex items-center justify-between">
+<h3 class="font-bold text-[#44475b]">Daily Schedule</h3>
+<button class="text-sm font-bold text-[var(--groww-primary)] hover:underline">Full Calendar</button>
+</div>
+<div class="p-6">
+<div class="space-y-6 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-100">
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 bg-[var(--groww-primary)] rounded-full border-4 border-white shadow-sm"></div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between bg-[var(--groww-bg)] p-4 rounded-xl border border-[var(--groww-border)]">
+<div class="flex items-center gap-4">
+<div class="text-sm font-bold text-[var(--groww-primary)] w-16">08:00 AM</div>
+<div>
+<p class="font-bold text-[#44475b]">Marcus Reid</p>
+<p class="text-xs text-[var(--text-secondary)]">Strength Training ΓÇó 60 min</p>
+</div>
+</div>
+<span class="mt-2 sm:mt-0 text-[10px] font-bold uppercase tracking-widest bg-emerald-100 text-emerald-700 px-2 py-1 rounded">In Progress</span>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 bg-gray-200 rounded-full border-4 border-white shadow-sm"></div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between bg-white p-4 rounded-xl border border-[var(--groww-border)]">
+<div class="flex items-center gap-4">
+<div class="text-sm font-bold text-[var(--text-secondary)] w-16">10:30 AM</div>
+<div>
+<p class="font-bold text-[#44475b]">Elena Rodriguez</p>
+<p class="text-xs text-[var(--text-secondary)]">HIIT Shred ΓÇó 45 min</p>
+</div>
+</div>
+<button class="mt-2 sm:mt-0 text-xs font-bold text-[var(--groww-primary)] border border-[var(--groww-primary)] px-3 py-1 rounded hover:bg-emerald-50">Details</button>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 bg-gray-200 rounded-full border-4 border-white shadow-sm"></div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between bg-white p-4 rounded-xl border border-[var(--groww-border)]">
+<div class="flex items-center gap-4">
+<div class="text-sm font-bold text-[var(--text-secondary)] w-16">02:00 PM</div>
+<div>
+<p class="font-bold text-[#44475b]">Sarah Miller</p>
+<p class="text-xs text-[var(--text-secondary)]">Mobility &amp; Flex ΓÇó 30 min</p>
+</div>
+</div>
+<button class="mt-2 sm:mt-0 text-xs font-bold text-[var(--groww-primary)] border border-[var(--groww-primary)] px-3 py-1 rounded hover:bg-emerald-50">Details</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="groww-card p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="font-bold text-[#44475b]">Client Engagement</h3>
+<p class="text-xs text-[var(--text-secondary)]">Active vs. Inactive over the last 7 days</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-[var(--groww-primary)]"></span>
+<span class="text-xs font-bold text-[var(--text-secondary)]">Active</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-gray-300"></span>
+<span class="text-xs font-bold text-[var(--text-secondary)]">Inactive</span>
+</div>
+</div>
+</div>
+<div class="h-48 w-full flex items-end gap-2 px-2 border-b border-gray-100">
+<div class="flex-1 bg-emerald-100 rounded-t-sm relative group h-[60%]">
+<div class="absolute bottom-0 w-full bg-[var(--groww-primary)] h-[80%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+</div>
+<div class="flex-1 bg-emerald-100 rounded-t-sm relative group h-[75%]">
+<div class="absolute bottom-0 w-full bg-[var(--groww-primary)] h-[85%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+</div>
+<div class="flex-1 bg-emerald-100 rounded-t-sm relative group h-[90%]">
+<div class="absolute bottom-0 w-full bg-[var(--groww-primary)] h-[92%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+</div>
+<div class="flex-1 bg-emerald-100 rounded-t-sm relative group h-[85%]">
+<div class="absolute bottom-0 w-full bg-[var(--groww-primary)] h-[88%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+</div>
+<div class="flex-1 bg-emerald-100 rounded-t-sm relative group h-[70%]">
+<div class="absolute bottom-0 w-full bg-[var(--groww-primary)] h-[82%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+</div>
+<div class="flex-1 bg-emerald-100 rounded-t-sm relative group h-[95%]">
+<div class="absolute bottom-0 w-full bg-[var(--groww-primary)] h-[95%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+</div>
+<div class="flex-1 bg-emerald-100 rounded-t-sm relative group h-[100%]">
+<div class="absolute bottom-0 w-full bg-[var(--groww-primary)] h-[98%] rounded-t-sm transition-all group-hover:opacity-80"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-bold text-[var(--text-secondary)] uppercase">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 space-y-8">
+<div class="groww-card p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-[#44475b]">Workout Library</h3>
+<span class="material-symbols-outlined text-gray-400">library_books</span>
+</div>
+<p class="text-xs font-bold text-[var(--text-secondary)] uppercase mb-4 tracking-wider">Most Used Templates</p>
+<div class="space-y-4">
+<div class="group flex items-center justify-between p-3 bg-[var(--groww-bg)] rounded-xl hover:border-[var(--groww-primary)] border border-transparent transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-[var(--groww-border)]">
+<span class="material-symbols-outlined text-emerald-500">bolt</span>
+</div>
+<div>
+<p class="text-sm font-bold text-[#44475b]">Full Body Blast</p>
+<p class="text-[10px] text-[var(--text-secondary)]">Used by 14 clients</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-300 group-hover:text-[var(--groww-primary)]">chevron_right</span>
+</div>
+<div class="group flex items-center justify-between p-3 bg-[var(--groww-bg)] rounded-xl hover:border-[var(--groww-primary)] border border-transparent transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-[var(--groww-border)]">
+<span class="material-symbols-outlined text-orange-500">timer</span>
+</div>
+<div>
+<p class="text-sm font-bold text-[#44475b]">HIIT Shred</p>
+<p class="text-[10px] text-[var(--text-secondary)]">Used by 9 clients</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-300 group-hover:text-[var(--groww-primary)]">chevron_right</span>
+</div>
+</div>
+<button class="w-full mt-6 py-2.5 text-sm font-bold bg-[#44475b] text-white rounded-lg hover:opacity-90 transition-opacity">Browse All Templates</button>
+</div>
+<div class="groww-card p-6">
+<h3 class="font-bold text-[#44475b] mb-6">Pending Tasks</h3>
+<div class="space-y-4">
+<div class="flex items-start gap-3 group">
+<div class="mt-1 w-5 h-5 rounded border-2 border-[var(--groww-border)] flex-shrink-0 flex items-center justify-center cursor-pointer group-hover:border-[var(--groww-primary)] transition-colors">
+</div>
+<div>
+<p class="text-sm font-semibold text-[#44475b]">Review Marcus's Nutrition Log</p>
+<p class="text-[11px] text-red-500 font-bold">Due Today</p>
+</div>
+</div>
+<div class="flex items-start gap-3 group">
+<div class="mt-1 w-5 h-5 rounded border-2 border-[var(--groww-border)] flex-shrink-0 flex items-center justify-center cursor-pointer group-hover:border-[var(--groww-primary)] transition-colors">
+</div>
+<div>
+<p class="text-sm font-semibold text-[#44475b]">Renew Plan for Sarah Jenkins</p>
+<p class="text-[11px] text-[var(--text-secondary)]">Expires in 2 days</p>
+</div>
+</div>
+<div class="flex items-start gap-3 group">
+<div class="mt-1 w-5 h-5 rounded border-2 border-[var(--groww-border)] flex-shrink-0 flex items-center justify-center cursor-pointer group-hover:border-[var(--groww-primary)] transition-colors">
+</div>
+<div>
+<p class="text-sm font-semibold text-[#44475b]">Assign Mobility drills to Elena</p>
+<p class="text-[11px] text-[var(--text-secondary)]">Requested via chat</p>
+</div>
+</div>
+<div class="flex items-start gap-3 group opacity-50">
+<div class="mt-1 w-5 h-5 rounded border-2 border-[var(--groww-primary)] bg-[var(--groww-primary)] flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[16px] font-bold">check</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-[#44475b] line-through">Confirm Monday PT Sessions</p>
+<p class="text-[11px] text-[var(--text-secondary)]">Completed 2h ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-10 text-center border-t border-[var(--groww-border)] bg-white">
+<div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--groww-primary)]">fitness_center</span>
+<span class="font-bold text-slate-700">FlexHub</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)]">┬⌐ 2024 FlexHub Trainer Portal. Professional Analytics for Fitness Experts.</p>
+</div>
+</footer>
+
+</body></html>

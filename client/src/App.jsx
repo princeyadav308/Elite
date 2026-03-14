@@ -13,6 +13,13 @@ import ReviewLaunchStep6 from './pages/onboarding/ReviewLaunchStep6';
 import AdminLayout from './layouts/AdminLayout';
 import SettingsLayout from './layouts/SettingsLayout';
 
+// Trainer Layouts
+import TrainerLayout from './layouts/TrainerLayout';
+
+// Trainer Pages
+import TrainerDashboard from './pages/trainer/TrainerDashboard';
+import TrainerSchedule from './pages/trainer/TrainerSchedule';
+
 // Admin Pages
 import Dashboard from './pages/admin/Dashboard';
 import Members from './pages/admin/Members';
@@ -69,6 +76,16 @@ function App() {
             <Route path="payouts" element={<Payouts />} />
             <Route path="subscriptions" element={<Subscriptions />} />
           </Route>
+        </Route>
+
+        {/* Trainer Routes */}
+        <Route path="/trainer" element={<TrainerLayout />}>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<TrainerDashboard />} />
+          <Route path="schedule" element={<TrainerSchedule />} />
+          <Route path="clients" element={<div className="p-8 font-semibold">Clients coming soon</div>} />
+          <Route path="library" element={<div className="p-8 font-semibold">Library coming soon</div>} />
+          <Route path="profile" element={<div className="p-8 font-semibold">Profile coming soon</div>} />
         </Route>
       </Routes>
     </Router>
