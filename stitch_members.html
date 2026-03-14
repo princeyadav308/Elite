@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Members Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#10b981", 
+                        "background-light": "#f0f6ff",
+                        "background-dark": "#0f172a",
+                        "card-light": "rgba(255, 255, 255, 0.8)",
+                        "card-dark": "rgba(30, 41, 59, 0.7)",
+                    },
+                    fontFamily: {
+                        display: ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1.5rem",
+                        'xl': "2rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #10b981;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 100%);
+        }
+        .dark body {
+            background: linear-gradient(135deg, #0f172a 0%, #064e3b 100%);
+        }
+        .glass-card {
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .member-row:hover {
+            background-color: rgba(16, 185, 129, 0.05);
+        }
+        .sparkline-bar {
+            transition: height 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 dark:text-slate-100 transition-colors duration-300">
+<nav class="sticky top-0 z-50 px-8 py-4 flex items-center justify-between bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-white/20 dark:border-white/5">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight">FlexHub</span>
+</div>
+<div class="hidden xl:flex items-center gap-6 text-sm font-semibold text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors py-1" href="#">Dashboard</a>
+<a class="text-primary relative py-1 after:content-[''] after:absolute after:bottom-[-19px] after:left-0 after:w-full after:h-[2px] after:bg-primary" href="#">Members</a>
+<a class="hover:text-primary transition-colors py-1" href="#">Staff Management</a>
+<a class="hover:text-primary transition-colors py-1" href="#">Financials</a>
+<a class="hover:text-primary transition-colors py-1" href="#">Revenue Calculator</a>
+<a class="hover:text-primary transition-colors py-1" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">dark_mode</span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-slate-700">
+<img alt="Admin avatar" class="w-9 h-9 rounded-full border-2 border-white dark:border-slate-700 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9nCv1QSX03jWhJBltoPL3zbFYZUx5KXZ7kezWseJogp4sdw5q6RD6YgFAbdrQir29zQFbm4dpP1zkMsivo8HwMzAcEAC7KSOScozkxV_HyJJPu2HL6xftj9G57HUTTcJ1lJY0xveLJ088JqW8fTX2npuV0Q3B3QRn7bvot2_7qAefJJC1w2h0hqHDPHOcn3kpHhbw9DUtJeV-_YiNMysDF4DqrWIkMDzcCna0WmIxBIcLUkntxtMYtKM0vtKTTVhAAPcPKynkmpFl"/>
+<div class="hidden lg:block">
+<p class="text-[11px] font-extrabold text-primary uppercase tracking-tighter leading-none">Admin</p>
+<p class="text-xs font-bold text-slate-700 dark:text-slate-200">Owner Access</p>
+</div>
+</div>
+</div>
+</nav>
+<main class="p-8 max-w-[1600px] mx-auto">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight">Members</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Manage and monitor your gym community</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2.5 bg-white/50 dark:bg-slate-800/50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-primary w-64 md:w-80 transition-all shadow-sm" placeholder="Search members by name, email..." type="text"/>
+</div>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-white/50 dark:bg-slate-800/50 border border-white/20 dark:border-white/5 rounded-2xl text-sm font-bold hover:bg-white transition-all shadow-sm">
+<span class="material-symbols-outlined text-lg text-slate-500">filter_list</span>
+                Filter
+            </button>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-2xl font-bold hover:brightness-105 transition-all shadow-lg shadow-emerald-500/20">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                Add Member
+            </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<div class="col-span-12 lg:col-span-8">
+<div class="glass-card bg-card-light dark:bg-card-dark rounded-xl overflow-hidden custom-shadow">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-100 dark:border-slate-800">
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Profile</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Plan Type</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Join Date</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Last Visit</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="member-row transition-colors cursor-pointer bg-emerald-50/30 dark:bg-emerald-900/10">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHQBiYk9hzoHiULDqxopiBX0DoD2FUg-B1y-L-B-KLBxZ9YVJg8D80jqZPQRj076mnz-CRIE4a4yq4yWfMAYqW-KKhQR5P-ChBc_AlZFQo0vEcNkdK6gdtoUidnqAtTOebwz4K9pasbvkjiT5g1K7h2cCRPw_mXpSuEAqrbZKZGA3YKoydqRtubztY18b2vZupnzAUYV2_66u4jE3NoUrtXNbtfIMaHcFmOgayIydR9QCop0srJYjnpoMdxz43THyKTwjjLzORFYyI"/>
+<div>
+<p class="text-sm font-bold">Alex Thompson</p>
+<p class="text-[11px] text-slate-500">alex.t@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Platinum</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Oct 12, 2023</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">2 hours ago</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGCsMnAPX-0SHgN7JGNHQQsejLKtn95-zdds-2786ghkyqRb-WU5zOGKYHK_OhkjhojxuAKurIm1DITPtjA2fBZDlXAgyqrGb1CXAx-wUs8ArR20LRDoPZSIScGqTu4nTw2aPerw-5HQfWV9go-cWzaXElRkNm6kEssCChZZIOUyaPvrI1unz3NeknDbh2BVYPOUTKOyIVIvQw7e72T2PRqcKbgCBNjgh0adNBqHZT_hrq-PdHP15VoK5bG94s7qD_UAps9ZZKbzLY"/>
+<div>
+<p class="text-sm font-bold">Marcus Chen</p>
+<p class="text-[11px] text-slate-500">m.chen@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Pro</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Nov 05, 2023</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Today, 09:15 AM</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-indigo-600 font-bold text-xs">SJ</div>
+<div>
+<p class="text-sm font-bold">Sarah Jenkins</p>
+<p class="text-[11px] text-slate-500">s.jenkins@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400">INACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Basic</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Aug 20, 2023</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">12 days ago</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdPJ1HenhyfrJ6jl1vMLB0PuggNhpR8SUc1XWnjZwbeNjOJOy01bNdgShimWnQk92t_bo-RmiSmF-Dapre33oe7uXW6UO1L_FmLHPLnP0utw8GuGtNS57TCceMwMz9N91DzfF2Pwo2yZbZ8HwwNJbpGNvxuspk6pnqH724QZcJ8qfmG03S3NUdwR4IDhqEm506mOqoJNG-8X1aATzrT5DSf0Xc-LKL9NXPSM-nKbrsU4EzbQ_ZEXeQBxuty2eU8A2NNPEEEpwC6KuL"/>
+<div>
+<p class="text-sm font-bold">David Miller</p>
+<p class="text-[11px] text-slate-500">david.m@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Platinum</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Jan 15, 2024</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Yesterday</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkkWvkiZU-8wECxop_Ngq7FhugqWf69NI4JAJ0JRLxB_AUco_106hTPDbvhpW4AeG26eBLOZZDg-Eib8F9YSWa1awQWjUsZwb0GZF4mhv1XaF3sPS4N-_uGo4a052fkecQ7-6sbGVv5c-sEvmy7HPKet4vaU9solC9e0675sCqlhcwJbJ2aM3e4HAdBQ2hdjEEqY1iEswamjBMHKlsczOMm8SDOVNTdSSckFxaNjshTeb27xuxOwwD7ap2AD5YZHjHfmVxPfZ7XJIe"/>
+<div>
+<p class="text-sm font-bold">Elena Rodriguez</p>
+<p class="text-[11px] text-slate-500">elena.rod@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Pro</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Sep 30, 2023</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">3 days ago</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9nCv1QSX03jWhJBltoPL3zbFYZUx5KXZ7kezWseJogp4sdw5q6RD6YgFAbdrQir29zQFbm4dpP1zkMsivo8HwMzAcEAC7KSOScozkxV_HyJJPu2HL6xftj9G57HUTTcJ1lJY0xveLJ088JqW8fTX2npuV0Q3B3QRn7bvot2_7qAefJJC1w2h0hqHDPHOcn3kpHhbw9DUtJeV-_YiNMysDF4DqrWIkMDzcCna0WmIxBIcLUkntxtMYtKM0vtKTTVhAAPcPKynkmpFl"/>
+<div>
+<p class="text-sm font-bold">James Wilson</p>
+<p class="text-[11px] text-slate-500">j.wilson@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Basic</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Dec 01, 2023</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Yesterday</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center text-orange-600 font-bold text-xs">LH</div>
+<div>
+<p class="text-sm font-bold">Lisa Huang</p>
+<p class="text-[11px] text-slate-500">l.huang@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400">OVERDUE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Pro</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Jul 18, 2023</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">22 days ago</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYq8KcCHEn62NdUJsNlqipCDmASW2gFdNMMgB0Kr_bpxhI9x-Eg2DEM_AfEsIeoy4IjtJymn9qphGqgzJXjpHyqMGpW_SP-wu2ue8vqUE2NIMc1yp-JSaD5UuauIz8isbknHy0XD0hf5XFmJ4GTzZNRuLvvM19pGQwCwnj4wAxZSU_SdBa7ThYxQ6CUTtu4e5az_G2c52Iu84-Hp3CUGhyJByF-krNiN5VuR_EEwIo6-NMvWyqwHNo1cX0t-gu_Ju1OTYj9vj6pptC"/>
+<div>
+<p class="text-sm font-bold">Ryan Patel</p>
+<p class="text-[11px] text-slate-500">r.patel@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Platinum</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Feb 10, 2024</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Today, 11:30 AM</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Member" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHQBiYk9hzoHiULDqxopiBX0DoD2FUg-B1y-L-B-KLBxZ9YVJg8D80jqZPQRj076mnz-CRIE4a4yq4yWfMAYqW-KKhQR5P-ChBc_AlZFQo0vEcNkdK6gdtoUidnqAtTOebwz4K9pasbvkjiT5g1K7h2cCRPw_mXpSuEAqrbZKZGA3YKoydqRtubztY18b2vZupnzAUYV2_66u4jE3NoUrtXNbtfIMaHcFmOgayIydR9QCop0srJYjnpoMdxz43THyKTwjjLzORFYyI"/>
+<div>
+<p class="text-sm font-bold">Chloe Smith</p>
+<p class="text-[11px] text-slate-500">c.smith@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Basic</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Jan 22, 2024</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">4 hours ago</span></td>
+</tr>
+<tr class="member-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center text-blue-600 font-bold text-xs">TG</div>
+<div>
+<p class="text-sm font-bold">Tyler Garcia</p>
+<p class="text-[11px] text-slate-500">t.garcia@example.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400">INACTIVE</span>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Pro</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">Nov 15, 2023</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500">1 month ago</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-6 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">
+                        Showing <span class="text-slate-800 dark:text-white font-bold">10</span> of <span class="text-slate-800 dark:text-white font-bold">1,284</span> members
+                    </p>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center p-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-400 hover:text-primary transition-all disabled:opacity-30 disabled:hover:text-slate-400" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center gap-1.5">
+<button class="w-10 h-10 rounded-xl bg-primary text-white text-sm font-bold shadow-md shadow-emerald-500/20">1</button>
+<button class="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400 transition-colors">2</button>
+<button class="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400 transition-colors">3</button>
+<span class="px-1 text-slate-400">...</span>
+<button class="w-10 h-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400 transition-colors">129</button>
+</div>
+<button class="flex items-center justify-center p-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4">
+<div class="glass-card bg-card-light dark:bg-card-dark p-8 rounded-xl custom-shadow sticky top-28">
+<div class="flex flex-col items-center text-center mb-8">
+<div class="relative mb-6">
+<div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-primary to-indigo-500">
+<img alt="Selected Member" class="w-full h-full rounded-full object-cover border-4 border-white dark:border-slate-900 shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHQBiYk9hzoHiULDqxopiBX0DoD2FUg-B1y-L-B-KLBxZ9YVJg8D80jqZPQRj076mnz-CRIE4a4yq4yWfMAYqW-KKhQR5P-ChBc_AlZFQo0vEcNkdK6gdtoUidnqAtTOebwz4K9pasbvkjiT5g1K7h2cCRPw_mXpSuEAqrbZKZGA3YKoydqRtubztY18b2vZupnzAUYV2_66u4jE3NoUrtXNbtfIMaHcFmOgayIydR9QCop0srJYjnpoMdxz43THyKTwjjLzORFYyI"/>
+</div>
+<button class="absolute bottom-1 right-1 w-10 h-10 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center shadow-lg border border-slate-100 dark:border-slate-700 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+<h2 class="text-2xl font-bold">Alex Thompson</h2>
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-extrabold rounded-full uppercase tracking-widest mt-2">Platinum Member</span>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Email</p>
+<p class="text-xs font-bold truncate">alex.t@example.com</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Phone</p>
+<p class="text-xs font-bold">+1 (555) 012-3456</p>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-4">
+<div>
+<h4 class="font-bold text-sm">Workout Consistency</h4>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Last 14 Days</p>
+</div>
+<span class="text-primary font-bold text-sm">+24%</span>
+</div>
+<div class="flex items-end gap-1.5 h-16 px-1">
+<div class="w-full bg-emerald-100 dark:bg-emerald-900/30 rounded-t-lg sparkline-bar h-[40%]"></div>
+<div class="w-full bg-emerald-100 dark:bg-emerald-900/30 rounded-t-lg sparkline-bar h-[60%]"></div>
+<div class="w-full bg-emerald-100 dark:bg-emerald-900/30 rounded-t-lg sparkline-bar h-[30%]"></div>
+<div class="w-full bg-primary rounded-t-lg sparkline-bar h-[85%]"></div>
+<div class="w-full bg-emerald-100 dark:bg-emerald-900/30 rounded-t-lg sparkline-bar h-[55%]"></div>
+<div class="w-full bg-emerald-100 dark:bg-emerald-900/30 rounded-t-lg sparkline-bar h-[75%]"></div>
+<div class="w-full bg-primary rounded-t-lg sparkline-bar h-[95%]"></div>
+<div class="w-full bg-emerald-100 dark:bg-emerald-900/30 rounded-t-lg sparkline-bar h-[45%]"></div>
+<div class="w-full bg-emerald-100 dark:bg-emerald-900/30 rounded-t-lg sparkline-bar h-[65%]"></div>
+<div class="w-full bg-primary rounded-t-lg sparkline-bar h-[100%]"></div>
+<div class="w-full bg-emerald-100 dark:bg-emerald-900/30 rounded-t-lg sparkline-bar h-[80%]"></div>
+<div class="w-full bg-primary rounded-t-lg sparkline-bar h-[90%]"></div>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4">Recent Activity</h4>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-800/40 rounded-2xl border border-white/20 dark:border-white/5">
+<div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined text-sm leading-none">login</span>
+</div>
+<div>
+<p class="text-xs font-bold">Checked in</p>
+<p class="text-[10px] text-slate-400">2 hours ago • Main Gym</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-800/40 rounded-2xl border border-white/20 dark:border-white/5">
+<div class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-indigo-600">
+<span class="material-symbols-outlined text-sm leading-none">self_improvement</span>
+</div>
+<div>
+<p class="text-xs font-bold">Booked Yoga Class</p>
+<p class="text-[10px] text-slate-400">Yesterday, 04:30 PM • Sarah J.</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-800/40 rounded-2xl border border-white/20 dark:border-white/5">
+<div class="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center text-orange-600">
+<span class="material-symbols-outlined text-sm leading-none">payments</span>
+</div>
+<div>
+<p class="text-xs font-bold">Renewal Paid</p>
+<p class="text-[10px] text-slate-400">Oct 12, 2023 • $99.00</p>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full py-4 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                        Full History
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="p-8 text-center text-slate-400 text-xs font-medium">
+    © 2024 FlexHub Gym Management Systems. All rights reserved.
+</footer>
+
+</body></html>

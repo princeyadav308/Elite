@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Owner Profile &amp; Security</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #00d09c;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+        }
+        .settings-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f1f5f9;
+        }
+        .nav-link {
+            @apply px-4 py-2 text-sm font-semibold transition-all duration-200 border-b-2 border-transparent hover:text-[var(--primary)];
+        }
+        .nav-link.active {
+            @apply text-[var(--primary)] border-[var(--primary)];
+        }
+        .sidebar-item {
+            @apply flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all;
+        }
+        .sidebar-item.active {
+            @apply bg-emerald-50 text-[var(--primary)];
+        }
+        .input-group label {
+            @apply block text-sm font-semibold text-slate-700 mb-2;
+        }
+        .input-group input, .input-group select {
+            @apply w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent outline-none transition-all;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .toggle-switch {
+            @apply relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ring-offset-2 focus:ring-2 focus:ring-[var(--primary)];
+        }
+        .toggle-active { @apply bg-[var(--primary)]; }
+        .toggle-inactive { @apply bg-slate-200; }
+        .toggle-dot {
+            @apply inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto px-6 h-18 flex items-center justify-between py-4">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-[var(--primary)] rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-200">
+<span class="material-symbols-outlined text-2xl">fitness_center</span>
+</div>
+<span class="text-2xl font-extrabold tracking-tight text-slate-800">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-1">
+<a class="nav-link text-slate-500" href="#">Dashboard</a>
+<a class="nav-link text-slate-500" href="#">Members</a>
+<a class="nav-link text-slate-500" href="#">Staff Management</a>
+<a class="nav-link text-slate-500" href="#">Financials</a>
+<a class="nav-link text-slate-500" href="#">Revenue Calculator</a>
+<a class="nav-link active" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-5">
+<button class="text-slate-400 hover:text-slate-600 transition-colors">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+<button class="relative text-slate-400 hover:text-slate-600 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="h-8 w-px bg-slate-200"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-slate-800">Alex Rivers</p>
+<p class="text-[10px] font-medium text-slate-400 uppercase tracking-wider">Gym Owner</p>
+</div>
+<img alt="User profile" class="w-10 h-10 rounded-full border-2 border-white shadow-sm ring-1 ring-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWGPdRtOT1pUGyHNrayJ3apYz6KLnWTYx7qbs64M9NjlTMTtV-Thqwol-4hFmpP7JAJPqK7n446iWVtoVJa1H5eAEk2SEDT0LpMupOt8lWdBRdA42DrBRIrY2ZZ4V6yufkGkzWuWOzmiKB9zQ-0qbMuTWx8PpyPz1fnubFtJmCAbTNGD_26zEi5Zu7EV3SQMroQv90j_NbVOxwqq8mdHOQ251979beZ2eD6ouBE7fmZkdoJndQGGeg0qQCERH679BDFBmh_yfnfHzA"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-6 py-10 w-full flex-grow">
+<div class="flex flex-col lg:flex-row gap-8">
+<aside class="w-full lg:w-72 space-y-6">
+<div class="settings-card p-6 text-center">
+<div class="relative w-24 h-24 mx-auto mb-4">
+<img alt="Profile" class="w-full h-full rounded-2xl object-cover shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo4wG0rvN3SUOFMUUtemnIkRi7-wsWwjGx8QtdYX6qs3pfU6_Gs9Gdwz5SWwDkstJXw5O0WtlwqgmN2U4XlWb3IPI7V7WAxzsZBApEbEBylbEkcJPG-gZ0_qQ5U__snPwLH1l-4yUAtId0GKg1WdgdHn9sE7ppSJoDieMGtt01yVlgmEkpbRz75oPSJC2bppuNZzBQL0Ij0ygfL-QQjVPYMDmJTLIybRUIZkKGgdwctqIn_sKH3JdDm83MXoP7JER2YJy2OxPG9tRX"/>
+<button class="absolute -bottom-2 -right-2 w-8 h-8 bg-white rounded-lg shadow-md flex items-center justify-center text-[var(--primary)] hover:bg-slate-50">
+<span class="material-symbols-outlined text-lg">photo_camera</span>
+</button>
+</div>
+<h2 class="text-xl font-bold text-slate-800">Alex Rivers</h2>
+<p class="text-xs font-semibold text-slate-400 tracking-widest uppercase mt-1">Gym Owner</p>
+<div class="mt-8 space-y-1 text-left">
+<a class="sidebar-item active" href="#">
+<span class="material-symbols-outlined">person</span>
+                        Profile Information
+                    </a>
+<a class="sidebar-item text-slate-600 hover:bg-slate-50" href="#">
+<span class="material-symbols-outlined">domain</span>
+                        Gym Profile
+                    </a>
+<a class="sidebar-item text-slate-600 hover:bg-slate-50" href="#">
+<span class="material-symbols-outlined">payments</span>
+                        Payouts
+                    </a>
+<a class="sidebar-item text-slate-600 hover:bg-slate-50" href="#">
+<span class="material-symbols-outlined">card_membership</span>
+                        Subscriptions
+                    </a>
+</div>
+<div class="pt-8 mt-8 border-t border-slate-100">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 text-red-500 font-bold text-sm hover:bg-red-50 rounded-xl transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+                        Logout
+                    </button>
+</div>
+</div>
+</aside>
+<div class="flex-1 space-y-8">
+<div class="settings-card overflow-hidden">
+<div class="p-6 border-b border-slate-50 bg-slate-50/50">
+<h3 class="text-lg font-bold text-slate-800">Profile Information</h3>
+<p class="text-sm text-slate-500">Manage your personal account details as the gym owner.</p>
+</div>
+<div class="p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" value="Alex Rivers"/>
+</div>
+<div class="input-group">
+<label>Email Address</label>
+<input type="email" value="alex.rivers@example.com"/>
+</div>
+<div class="input-group">
+<label>Phone Number</label>
+<input type="tel" value="+1 (555) 000-1234"/>
+</div>
+<div class="input-group">
+<label>Date of Birth</label>
+<input type="date" value="1992-06-15"/>
+</div>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="bg-[var(--primary)] text-white px-8 py-3 rounded-xl font-bold text-sm hover:opacity-90 shadow-lg shadow-emerald-100 transition-all">
+                            Save Changes
+                        </button>
+</div>
+</div>
+</div>
+<div class="settings-card overflow-hidden">
+<div class="p-6 border-b border-slate-50 bg-slate-50/50">
+<h3 class="text-lg font-bold text-slate-800">Security</h3>
+<p class="text-sm text-slate-500">Maintain your account security and authentication methods.</p>
+</div>
+<div class="p-8 space-y-8">
+<div>
+<h4 class="text-sm font-bold text-slate-800 mb-6 uppercase tracking-wider">Change Password</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="input-group">
+<label>Current Password</label>
+<input placeholder="••••••••" type="password"/>
+</div>
+<div class="input-group">
+<label>New Password</label>
+<input placeholder="••••••••" type="password"/>
+</div>
+<div class="input-group">
+<label>Confirm New Password</label>
+<input placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="mt-6 flex justify-end">
+<button class="bg-slate-800 text-white px-6 py-2.5 rounded-lg font-bold text-sm hover:bg-slate-700 transition-all">
+                                Update Password
+                            </button>
+</div>
+</div>
+<div class="pt-8 border-t border-slate-100">
+<div class="flex items-center justify-between">
+<div class="space-y-1">
+<h4 class="text-sm font-bold text-slate-800">Two-Factor Authentication</h4>
+<p class="text-xs text-slate-500">Secure your account with an extra layer of security via SMS or authenticator app.</p>
+</div>
+<button class="toggle-switch toggle-active">
+<span class="toggle-dot translate-x-6"></span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="settings-card overflow-hidden">
+<div class="p-6 border-b border-slate-50 bg-slate-50/50">
+<h3 class="text-lg font-bold text-slate-800">Notification Preferences</h3>
+<p class="text-sm text-slate-500">Control how and when you receive updates from FlexHub.</p>
+</div>
+<div class="p-8">
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-800">Email Notifications</h4>
+<p class="text-xs text-slate-500">Receive system alerts and updates via email.</p>
+</div>
+</div>
+<button class="toggle-switch toggle-active">
+<span class="toggle-dot translate-x-6"></span>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-800">Push Notifications</h4>
+<p class="text-xs text-slate-500">Get instant alerts on your mobile device.</p>
+</div>
+</div>
+<button class="toggle-switch toggle-inactive">
+<span class="toggle-dot translate-x-1"></span>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-800">Weekly Reports</h4>
+<p class="text-xs text-slate-500">Summary of gym performance and member activity.</p>
+</div>
+</div>
+<button class="toggle-switch toggle-active">
+<span class="toggle-dot translate-x-6"></span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-10 bg-white border-t border-slate-100">
+<div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--primary)]">fitness_center</span>
+<span class="font-extrabold text-slate-800">FlexHub</span>
+</div>
+<div class="flex gap-8 text-xs font-semibold text-slate-400">
+<a class="hover:text-[var(--primary)] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[var(--primary)] transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-[var(--primary)] transition-colors" href="#">Help Center</a>
+</div>
+<p class="text-xs text-slate-400 mt-2">© 2024 FlexHub Inc. Owner Management Suite.</p>
+</div>
+</footer>
+
+</body></html>

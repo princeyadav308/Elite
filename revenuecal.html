@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexHub - Gym Revenue Calculator</title>
+    <!-- Tailwind CSS for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for the Donut Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        flexTeal: '#00D9B5',
+                        flexDark: '#1A1A1A',
+                        flexLight: '#F5F7FA',
+                        flexGreen: '#10B981',
+                        flexRed: '#EF4444',
+                        flexPurple: '#4F46E5',
+                        flexPurpleLight: '#C7D2FE'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F7FA;
+        }
+
+        /* Custom Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #00D9B5;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        /* Toggle/Checkbox Styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #00D9B5;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #00D9B5;
+        }
+
+        /* Smooth expansion for details */
+        details>summary {
+            list-style: none;
+            cursor: pointer;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* AI Modal Animation */
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .ai-card {
+            animation: slideIn 0.4s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm py-4 px-8 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="bg-flexTeal text-white p-1 rounded font-bold text-xl"><i class="fa-solid fa-dumbbell"></i></div>
+            <span class="font-bold text-xl tracking-tight">FlexHub</span>
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-gray-500">
+            <a href="#" class="hover:text-flexTeal">Dashboard</a>
+            <a href="#" class="text-flexTeal border-b-2 border-flexTeal pb-4 -mb-4">Revenue Calculator</a>
+            <a href="#" class="hover:text-flexTeal">Members</a>
+            <a href="#" class="hover:text-flexTeal">Financials</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <i class="fa-regular fa-bell text-gray-400"></i>
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-500">
+                <i class="fa-regular fa-user"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto p-6 mt-4">
+        <h1 class="text-2xl font-bold text-flexDark mb-6">Gym Revenue Calculator</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- LEFT PANEL: INPUTS -->
+            <div class="lg:col-span-5 space-y-8 bg-white p-8 rounded-2xl shadow-sm h-fit">
+
+                <!-- Section 1: Core Metrics -->
+                <div class="space-y-6">
+                    <!-- Total Members -->
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <label class="text-gray-500 font-medium">Total Active Members</label>
+                            <span id="display-members" class="text-3xl font-bold text-flexTeal">250</span>
+                        </div>
+                        <input type="range" id="slider-members" min="0" max="1000" value="250" class="w-full">
+                    </div>
+
+                    <!-- Avg Plan Price -->
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <label class="text-gray-500 font-medium">Avg. Plan Price ($)</label>
+                            <span id="display-price" class="text-3xl font-bold text-flexTeal">59</span>
+                        </div>
+                        <input type="range" id="slider-price" min="10" max="200" value="59" class="w-full">
+                    </div>
+
+                    <!-- Monthly Expenses (Base) -->
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <label class="text-gray-500 font-medium">Monthly Expenses ($)</label>
+                            <span id="display-expenses" class="text-3xl font-bold text-flexTeal">4500</span>
+                        </div>
+                        <input type="range" id="slider-expenses" min="0" max="20000" value="4500" class="w-full">
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <hr class="border-gray-100">
+
+                <!-- Advanced Accordions -->
+                <div class="space-y-4">
+                    <!-- Additional Revenue -->
+                    <details class="group bg-gray-50 rounded-lg p-3">
+                        <summary class="flex justify-between items-center font-medium text-gray-600">
+                            <span><i class="fa-solid fa-plus-circle text-flexTeal mr-2"></i> Additional Revenue
+                                Sources</span>
+                            <i class="fa-solid fa-chevron-down text-sm transition group-open:rotate-180"></i>
+                        </summary>
+                        <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <label class="block text-gray-500 mb-1">Personal Training ($)</label>
+                                <input type="number" id="inp-pt" value="0"
+                                    class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-gray-500 mb-1">Merchandise ($)</label>
+                                <input type="number" id="inp-merch" value="0"
+                                    class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-gray-500 mb-1">Locker Rentals ($)</label>
+                                <input type="number" id="inp-locker" value="0"
+                                    class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-gray-500 mb-1">Guest Passes ($)</label>
+                                <input type="number" id="inp-guest" value="0"
+                                    class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Advanced Expenses -->
+                    <details class="group bg-gray-50 rounded-lg p-3">
+                        <summary class="flex justify-between items-center font-medium text-gray-600">
+                            <span><i class="fa-solid fa-minus-circle text-red-400 mr-2"></i> Detailed Expense
+                                Breakdown</span>
+                            <i class="fa-solid fa-chevron-down text-sm transition group-open:rotate-180"></i>
+                        </summary>
+                        <div class="mt-4 space-y-3 text-sm">
+                            <p class="text-xs text-gray-400 italic mb-2">*Adding values here adds to the base slider
+                                expense</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-500 mb-1">Rent/Utilities ($)</label>
+                                    <input type="number" id="inp-rent" value="0"
+                                        class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-500 mb-1">Staff Salaries ($)</label>
+                                    <input type="number" id="inp-staff" value="0"
+                                        class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-500 mb-1">Marketing ($)</label>
+                                    <input type="number" id="inp-marketing" value="0"
+                                        class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-500 mb-1">Maintenance ($)</label>
+                                    <input type="number" id="inp-maint" value="0"
+                                        class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Member Growth Context -->
+                    <details class="group bg-gray-50 rounded-lg p-3">
+                        <summary class="flex justify-between items-center font-medium text-gray-600">
+                            <span><i class="fa-solid fa-chart-line text-blue-400 mr-2"></i> Growth Context</span>
+                            <i class="fa-solid fa-chevron-down text-sm transition group-open:rotate-180"></i>
+                        </summary>
+                        <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <label class="block text-gray-500 mb-1">New Members (MoM)</label>
+                                <input type="number" id="inp-new" value="15"
+                                    class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-gray-500 mb-1">Churned Members</label>
+                                <input type="number" id="inp-churn" value="8"
+                                    class="w-full p-2 border rounded focus:border-flexTeal outline-none transition">
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: VISUALIZATION -->
+            <div class="lg:col-span-7 space-y-6">
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm min-h-[500px] flex flex-col justify-between">
+
+                    <!-- Chart Section -->
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-10 mb-8">
+                        <div class="relative w-64 h-64">
+                            <canvas id="revenueChart"></canvas>
+                            <!-- Center Text in Donut -->
+                            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                <span class="text-gray-400 text-sm">Net Profit</span>
+                                <span id="center-profit" class="text-2xl font-bold text-flexDark">$10,250</span>
+                            </div>
+                        </div>
+
+                        <!-- Legend & Key Metrics -->
+                        <div class="w-full md:w-auto space-y-6">
+                            <div class="flex items-center gap-3">
+                                <span class="w-3 h-3 rounded-full bg-flexPurpleLight"></span>
+                                <span class="text-gray-500 w-20">Expenses</span>
+                                <span id="legend-expenses" class="font-bold text-gray-800">$4,500</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-3 h-3 rounded-full bg-flexPurple"></span>
+                                <span class="text-gray-500 w-20">Profit</span>
+                                <span id="legend-profit" class="font-bold text-gray-800">$10,250</span>
+                            </div>
+
+                            <hr class="border-gray-100 my-4">
+
+                            <div class="flex justify-between items-center gap-8">
+                                <div>
+                                    <p class="text-sm text-gray-500 mb-1">Profit Margin</p>
+                                    <p id="metric-margin" class="text-2xl font-bold text-flexGreen">69.5%</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm text-gray-500 mb-1">Member Growth</p>
+                                    <p id="metric-growth" class="text-2xl font-bold text-flexGreen">+12.4%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Summary Bar -->
+                    <div class="grid grid-cols-3 gap-4 border-t border-gray-100 pt-6">
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Gross Income</p>
+                            <p id="footer-gross" class="text-2xl font-bold text-gray-800">$14,750</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Total Expenses</p>
+                            <p id="footer-expenses" class="text-2xl font-bold text-gray-800">$4,500</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Est. Monthly Profit</p>
+                            <p id="footer-profit" class="text-2xl font-bold text-gray-800">$10,250</p>
+                        </div>
+                    </div>
+
+                    <!-- AI Trigger Button -->
+                    <button onclick="triggerAI()"
+                        class="w-full mt-8 bg-flexTeal hover:bg-[#00c4a4] text-white font-bold py-4 rounded-xl shadow-lg shadow-teal-200 transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> CALCULATE & GET AI RECOMMENDATIONS
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- AI RECOMMENDATIONS SECTION (Hidden by default) -->
+        <div id="ai-section" class="hidden mt-8 max-w-7xl mx-auto mb-20">
+            <h2 class="text-xl font-bold text-flexDark mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-robot text-flexPurple"></i> AI Analysis & Recommendations
+            </h2>
+
+            <!-- Status Banner -->
+            <div id="ai-banner" class="p-4 rounded-lg mb-6 flex items-center gap-4 text-white font-medium">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Cards Grid -->
+            <div id="ai-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards injected via JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- QR Footer (Visual Only) -->
+    <div class="max-w-7xl mx-auto px-6 mb-8">
+        <div class="bg-white p-4 rounded-xl shadow-sm flex items-center justify-between border border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="bg-gray-100 p-2 rounded">
+                    <i class="fa-solid fa-qrcode text-2xl text-gray-600"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-flexTeal font-bold uppercase"><i class="fa-solid fa-check-circle"></i> Member
+                        Registered</p>
+                    <p class="text-sm font-medium text-gray-700">Last Action: Marcus Holloway ID: #FLX-9920</p>
+                </div>
+            </div>
+            <button class="text-flexPurple text-sm font-medium hover:underline"><i class="fa-solid fa-share-nodes"></i>
+                Share Report</button>
+        </div>
+        <p class="text-center text-xs text-gray-400 mt-6">© 2026 FlexHub Gym Management System. Standardized Admin
+            Interface.</p>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. DOM Elements ---
+        const sliders = {
+            members: document.getElementById('slider-members'),
+            price: document.getElementById('slider-price'),
+            expenses: document.getElementById('slider-expenses')
+        };
+
+        const displays = {
+            members: document.getElementById('display-members'),
+            price: document.getElementById('display-price'),
+            expenses: document.getElementById('display-expenses')
+        };
+
+        const details = {
+            pt: document.getElementById('inp-pt'),
+            merch: document.getElementById('inp-merch'),
+            locker: document.getElementById('inp-locker'),
+            guest: document.getElementById('inp-guest'),
+            rent: document.getElementById('inp-rent'),
+            staff: document.getElementById('inp-staff'),
+            marketing: document.getElementById('inp-marketing'),
+            maint: document.getElementById('inp-maint'),
+            new: document.getElementById('inp-new'),
+            churn: document.getElementById('inp-churn')
+        };
+
+        const outputs = {
+            gross: document.getElementById('footer-gross'),
+            expenses: document.getElementById('footer-expenses'),
+            profit: document.getElementById('footer-profit'),
+            centerProfit: document.getElementById('center-profit'),
+            legendExp: document.getElementById('legend-expenses'),
+            legendProf: document.getElementById('legend-profit'),
+            margin: document.getElementById('metric-margin'),
+            growth: document.getElementById('metric-growth')
+        };
+
+        // --- 2. Chart Initialization ---
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Expenses', 'Profit'],
+                datasets: [{
+                    data: [4500, 10250],
+                    backgroundColor: ['#C7D2FE', '#4F46E5'], // Light Purple, Dark Purple
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.label || '';
+                                if (label) { label += ': '; }
+                                label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.raw);
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- 3. Calculation Logic ---
+        function calculate() {
+            // Get Base Slider Values
+            const members = parseInt(sliders.members.value);
+            const price = parseInt(sliders.price.value);
+            const baseExpenses = parseInt(sliders.expenses.value);
+
+            // Get Additional Revenue
+            const addRev = (parseInt(details.pt.value) || 0) +
+                (parseInt(details.merch.value) || 0) +
+                (parseInt(details.locker.value) || 0) +
+                (parseInt(details.guest.value) || 0);
+
+            // Get Additional Expenses
+            const addExp = (parseInt(details.rent.value) || 0) +
+                (parseInt(details.staff.value) || 0) +
+                (parseInt(details.marketing.value) || 0) +
+                (parseInt(details.maint.value) || 0);
+
+            // Core Calculations
+            const grossIncome = (members * price) + addRev;
+            const totalExpenses = baseExpenses + addExp;
+            const monthlyProfit = grossIncome - totalExpenses;
+
+            // Margin Calculation
+            let profitMargin = 0;
+            if (grossIncome > 0) {
+                profitMargin = (monthlyProfit / grossIncome) * 100;
+            }
+
+            // Growth Calculation
+            const netGrowth = (parseInt(details.new.value) || 0) - (parseInt(details.churn.value) || 0);
+            let growthRate = 0;
+            if (members > 0) {
+                growthRate = (netGrowth / members) * 100;
+            }
+
+            // Update UI Numbers
+            updateDisplay(grossIncome, totalExpenses, monthlyProfit, profitMargin, growthRate);
+
+            // Update Chart
+            updateChart(totalExpenses, monthlyProfit);
+        }
+
+        function updateDisplay(gross, exp, profit, margin, growth) {
+            const fmt = (num) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
+
+            outputs.gross.innerText = fmt(gross);
+            outputs.expenses.innerText = fmt(exp);
+            outputs.profit.innerText = fmt(profit);
+            outputs.centerProfit.innerText = fmt(profit);
+            outputs.legendExp.innerText = fmt(exp);
+            outputs.legendProf.innerText = fmt(profit);
+
+            outputs.margin.innerText = margin.toFixed(1) + '%';
+            outputs.margin.className = `text-2xl font-bold ${margin >= 20 ? 'text-flexGreen' : (margin > 0 ? 'text-yellow-500' : 'text-flexRed')}`;
+
+            outputs.growth.innerText = (growth > 0 ? '+' : '') + growth.toFixed(1) + '%';
+            outputs.growth.className = `text-2xl font-bold ${growth >= 0 ? 'text-flexGreen' : 'text-flexRed'}`;
+
+            // Update Slider Labels
+            displays.members.innerText = sliders.members.value;
+            displays.price.innerText = sliders.price.value;
+            displays.expenses.innerText = sliders.expenses.value;
+        }
+
+        function updateChart(expenses, profit) {
+            // If profit is negative, we need to handle chart logic carefully
+            // Standardizing: Show Expense as full circle if loss, or split if profit
+            let chartData = [];
+            let chartColors = [];
+
+            if (profit < 0) {
+                // Loss scenario
+                chartData = [expenses, 0];
+                chartColors = ['#EF4444', '#C7D2FE']; // Red for expenses/loss
+            } else {
+                chartData = [expenses, profit];
+                chartColors = ['#C7D2FE', '#4F46E5'];
+            }
+
+            revenueChart.data.datasets[0].data = chartData;
+            revenueChart.data.datasets[0].backgroundColor = chartColors;
+            revenueChart.update();
+        }
+
+        // --- 4. Event Listeners ---
+        // Attach listener to all inputs
+        const allInputs = [...Object.values(sliders), ...Object.values(details)];
+        allInputs.forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        // --- 5. AI Recommendation Engine ---
+        function triggerAI() {
+            const section = document.getElementById('ai-section');
+            const container = document.getElementById('ai-cards-container');
+            const banner = document.getElementById('ai-banner');
+
+            section.classList.remove('hidden');
+            section.scrollIntoView({ behavior: 'smooth' });
+
+            // Clear previous
+            container.innerHTML = '';
+
+            // Get current metrics
+            const grossIncome = parseFloat(outputs.gross.innerText.replace(/[^0-9.-]+/g, ""));
+            const profitMargin = parseFloat(outputs.margin.innerText);
+            const avgPrice = parseInt(sliders.price.value);
+            const members = parseInt(sliders.members.value);
+            const staffCost = parseInt(details.staff.value) || 0;
+
+            // 1. Generate Banner Status
+            if (profitMargin > 30) {
+                banner.className = "bg-flexGreen p-4 rounded-lg mb-6 flex items-center gap-4 text-white font-medium shadow-lg";
+                banner.innerHTML = `<i class="fa-solid fa-trophy text-2xl"></i> <div><p class="font-bold text-lg">Excellent Health!</p><p class="text-sm opacity-90">Your gym is performing in the top tier of profitability.</p></div>`;
+            } else if (profitMargin > 15) {
+                banner.className = "bg-yellow-500 p-4 rounded-lg mb-6 flex items-center gap-4 text-white font-medium shadow-lg";
+                banner.innerHTML = `<i class="fa-solid fa-thumbs-up text-2xl"></i> <div><p class="font-bold text-lg">Good Stability</p><p class="text-sm opacity-90">Profitable, but there is room for optimization.</p></div>`;
+            } else {
+                banner.className = "bg-flexRed p-4 rounded-lg mb-6 flex items-center gap-4 text-white font-medium shadow-lg";
+                banner.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-2xl"></i> <div><p class="font-bold text-lg">Optimization Needed</p><p class="text-sm opacity-90">Profit margins are critically low. Action required.</p></div>`;
+            }
+
+            // 2. Generate Dynamic Cards
+            const recommendations = [];
+
+            // Logic: Pricing
+            if (avgPrice < 45) {
+                const potentialRev = members * 10;
+                recommendations.push({
+                    title: "Pricing Opportunity",
+                    icon: "fa-tag",
+                    color: "text-blue-500",
+                    desc: `Your average price ($${avgPrice}) is below the $55 industry standard.`,
+                    action: `Increase by $10 to add <b>$${potentialRev.toLocaleString()}/mo</b> in revenue.`,
+                    btn: "Simulate Price Hike"
+                });
+            }
+
+            // Logic: Growth
+            if (members < 300) {
+                recommendations.push({
+                    title: "Capacity Utilization",
+                    icon: "fa-users",
+                    color: "text-purple-500",
+                    desc: `You are likely under 60% capacity (assuming 500 cap).`,
+                    action: "Launch a referral program (Refer-a-friend gets 1 month free) to fill spots without ad spend.",
+                    btn: "Setup Referral Program"
+                });
+            }
+
+            // Logic: Staff Cost
+            if (staffCost > (grossIncome * 0.4) && staffCost > 0) {
+                recommendations.push({
+                    title: "High Staff Costs",
+                    icon: "fa-user-tie",
+                    color: "text-orange-500",
+                    desc: `Staff costs are ${(staffCost / grossIncome * 100).toFixed(0)}% of revenue (Target: 25-30%).`,
+                    action: "Shift trainers to a commission-based hybrid model to lower fixed overhead.",
+                    btn: "View Compensation Models"
+                });
+            }
+
+            // Logic: Ancillary Revenue
+            const ancRev = (parseInt(details.pt.value) || 0) + (parseInt(details.merch.value) || 0);
+            if (ancRev < (grossIncome * 0.15)) {
+                recommendations.push({
+                    title: "Boost Secondary Revenue",
+                    icon: "fa-shop",
+                    color: "text-green-500",
+                    desc: "Merch & PT make up less than 15% of your income.",
+                    action: "Place supplements at the front desk or bundle PT sessions with memberships.",
+                    btn: "Inventory Ideas"
+                });
+            }
+
+            // Default card if running well
+            if (recommendations.length === 0) {
+                recommendations.push({
+                    title: "Expansion Ready",
+                    icon: "fa-building",
+                    color: "text-flexTeal",
+                    desc: "Your metrics indicate you are ready to scale.",
+                    action: "Consider looking for a second location or franchising.",
+                    btn: "Expansion Calculator"
+                });
+            }
+
+            // Render Cards
+            recommendations.forEach((rec, index) => {
+                const html = `
+                <div class="ai-card bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition" style="animation-delay: ${index * 100}ms">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center ${rec.color}">
+                            <i class="fa-solid ${rec.icon}"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800">${rec.title}</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">${rec.desc}</p>
+                    <p class="text-sm text-gray-800 bg-gray-50 p-2 rounded mb-4 border-l-4 border-teal-400">${rec.action}</p>
+                    <button class="text-xs font-bold text-flexTeal uppercase tracking-wide hover:text-teal-600">${rec.btn} &rarr;</button>
+                </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        // Initialize on load
+        calculate();
+
+    </script>
+</body>
+
+</html>

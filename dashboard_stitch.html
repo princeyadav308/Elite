@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Downtown Heights Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #10b981;
+            --accent-emerald: #059669;
+            --bg-light: #ffffff;
+            --card-light: #f9fafb;
+            --text-main: #111827;
+            --text-secondary: #6b7280;
+            --border-color: #f3f4f6;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+        }
+        .dashboard-card {
+            background: var(--card-light);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+        .dashboard-card:hover {
+            border-color: var(--primary);
+        }
+        .nav-link {
+            @apply px-4 py-2 text-sm font-semibold transition-all duration-200 border-b-2 border-transparent hover:text-[var(--primary)];
+        }
+        .nav-link.active {
+            @apply text-[var(--primary)] border-[var(--primary)];
+        }
+        .kpi-card {
+            @apply dashboard-card p-5 flex flex-col justify-between;
+        }
+        .mini-chart-bar {
+            @apply bg-[var(--primary)] rounded-t-sm opacity-60 hover:opacity-100 transition-opacity;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center text-white shadow-lg shadow-emerald-500/20">
+<span class="material-symbols-outlined text-xl font-bold">fitness_center</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight text-gray-900">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-1">
+<a class="nav-link active" href="#">Dashboard</a>
+<a class="nav-link text-gray-500" href="#">Members</a>
+<a class="nav-link text-gray-500" href="#">Staff Management</a>
+<a class="nav-link text-gray-500" href="#">Financials</a>
+<a class="nav-link text-gray-500" href="#">Revenue Calculator</a>
+<a class="nav-link text-gray-500" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-gray-400 hover:text-gray-900">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-emerald-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="h-6 w-px bg-gray-200"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-gray-900 uppercase tracking-wider">Elite Fitness Group</p>
+<p class="text-[10px] font-medium text-emerald-600 uppercase tracking-widest">Strategic Analyst</p>
+</div>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-gray-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo4wG0rvN3SUOFMUUtemnIkRi7-wsWwjGx8QtdYX6qs3pfU6_Gs9Gdwz5SWwDkstJXw5O0WtlwqgmN2U4XlWb3IPI7V7WAxzsZBApEbEBylbEkcJPG-gZ0_qQ5U__snPwLH1l-4yUAtId0GKg1WdgdHn9sE7ppSJoDieMGtt01yVlgmEkpbRz75oPSJC2bppuNZzBQL0Ij0ygfL-QQjVPYMDmJTLIybRUIZkKGgdwctqIn_sKH3JdDm83MXoP7JER2YJy2OxPG9tRX"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-[1440px] mx-auto px-6 py-6 w-full flex-grow space-y-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl font-extrabold text-gray-900 tracking-tight">Downtown Heights Hub</h1>
+<p class="text-gray-500 text-sm">Detailed analytics and performance metrics for the Q3 period</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-gray-50 p-1 rounded-lg border border-gray-200 flex">
+<button class="px-3 py-1.5 text-xs font-bold text-gray-900 bg-white shadow-sm rounded-md">Live</button>
+<button class="px-3 py-1.5 text-xs font-bold text-gray-500 hover:text-gray-900">Historic</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-[var(--primary)] text-white rounded-lg text-xs font-bold hover:bg-emerald-600 transition-all shadow-md shadow-emerald-500/20">
+<span class="material-symbols-outlined text-sm">analytics</span>
+                Generate Data Export
+            </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="kpi-card">
+<div class="flex justify-between items-start">
+<span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Active Members</span>
+<span class="text-emerald-600 text-[10px] font-bold bg-emerald-50 px-1.5 py-0.5 rounded">+12.4% vs PW</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900">1,284</span>
+<span class="text-xs text-gray-400 font-medium">prev: 1,142</span>
+</div>
+<div class="mt-4 flex items-end gap-1 h-8">
+<div class="flex-1 bg-emerald-500/10 h-[40%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500/10 h-[60%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500/10 h-[50%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500/30 h-[70%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500 h-[90%] rounded-sm"></div>
+</div>
+</div>
+<div class="kpi-card">
+<div class="flex justify-between items-start">
+<span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Gross Revenue</span>
+<span class="text-emerald-600 text-[10px] font-bold bg-emerald-50 px-1.5 py-0.5 rounded">+$4.2k vs PM</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900">$42,500</span>
+<span class="text-xs text-gray-400 font-medium">target: $40k</span>
+</div>
+<div class="mt-4 flex items-end gap-1 h-8">
+<div class="flex-1 bg-emerald-500/10 h-[80%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500/30 h-[85%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500/10 h-[60%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500/40 h-[75%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500 h-[95%] rounded-sm"></div>
+</div>
+</div>
+<div class="kpi-card">
+<div class="flex justify-between items-start">
+<span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Member Retention</span>
+<span class="text-red-600 text-[10px] font-bold bg-red-50 px-1.5 py-0.5 rounded">-1.2% vs PM</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900">94.2%</span>
+<span class="text-xs text-gray-400 font-medium">bench: 95%</span>
+</div>
+<div class="mt-4 flex items-end gap-1 h-8">
+<div class="flex-1 bg-red-500/30 h-[95%] rounded-sm"></div>
+<div class="flex-1 bg-red-500/30 h-[92%] rounded-sm"></div>
+<div class="flex-1 bg-red-500/30 h-[94%] rounded-sm"></div>
+<div class="flex-1 bg-red-500/10 h-[93%] rounded-sm"></div>
+<div class="flex-1 bg-red-500/50 h-[90%] rounded-sm"></div>
+</div>
+</div>
+<div class="kpi-card">
+<div class="flex justify-between items-start">
+<span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Cost per Lead</span>
+<span class="text-emerald-600 text-[10px] font-bold bg-emerald-50 px-1.5 py-0.5 rounded">-$2.40 Optim</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900">$14.20</span>
+<span class="text-xs text-gray-400 font-medium">prev: $16.60</span>
+</div>
+<div class="mt-4 flex items-end gap-1 h-8">
+<div class="flex-1 bg-gray-200 h-[60%] rounded-sm"></div>
+<div class="flex-1 bg-gray-200 h-[55%] rounded-sm"></div>
+<div class="flex-1 bg-gray-200 h-[45%] rounded-sm"></div>
+<div class="flex-1 bg-gray-200 h-[40%] rounded-sm"></div>
+<div class="flex-1 bg-emerald-500 h-[35%] rounded-sm"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="dashboard-card p-6 flex flex-col h-full">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Revenue Distribution</h3>
+<span class="material-symbols-outlined text-gray-400 text-lg cursor-pointer hover:text-gray-600">more_vert</span>
+</div>
+<div class="flex-grow flex flex-col justify-center space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-bold text-gray-500">
+<span>MEMBERSHIPS</span>
+<span class="text-emerald-600">$32,000 (75%)</span>
+</div>
+<div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[75%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-bold text-gray-500">
+<span>PERSONAL TRAINING</span>
+<span class="text-emerald-600">$8,500 (20%)</span>
+</div>
+<div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[20%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-bold text-gray-500">
+<span>RETAIL/CAFE</span>
+<span class="text-emerald-600">$2,000 (5%)</span>
+</div>
+<div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[5%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-gray-200 flex justify-between items-center text-[10px] font-bold text-gray-400">
+<span>ANALYSIS: UPWARD TREND</span>
+<a class="text-emerald-600 hover:underline" href="#">VIEW DETAIL</a>
+</div>
+</div>
+<div class="dashboard-card p-6 flex flex-col h-full">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Member Traffic Density</h3>
+<select class="bg-transparent border-none text-[10px] font-bold text-gray-500 focus:ring-0 p-0 cursor-pointer">
+<option>LAST 7 DAYS</option>
+<option>LAST 30 DAYS</option>
+</select>
+</div>
+<div class="flex-grow flex items-end gap-2 pb-2">
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-gray-200 rounded-md h-24 relative overflow-hidden">
+<div class="absolute bottom-0 inset-x-0 bg-emerald-500/20 h-[65%]"></div>
+</div>
+<span class="text-[9px] font-bold text-gray-400 uppercase">Mon</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-gray-200 rounded-md h-24 relative overflow-hidden">
+<div class="absolute bottom-0 inset-x-0 bg-emerald-500/20 h-[85%]"></div>
+</div>
+<span class="text-[9px] font-bold text-gray-400 uppercase">Tue</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-gray-200 rounded-md h-24 relative overflow-hidden">
+<div class="absolute bottom-0 inset-x-0 bg-emerald-500/20 h-[75%]"></div>
+</div>
+<span class="text-[9px] font-bold text-gray-400 uppercase">Wed</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-gray-200 rounded-md h-24 relative overflow-hidden">
+<div class="absolute bottom-0 inset-x-0 bg-emerald-500 h-[100%]"></div>
+</div>
+<span class="text-[9px] font-bold text-emerald-600 uppercase">Thu</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-gray-200 rounded-md h-24 relative overflow-hidden">
+<div class="absolute bottom-0 inset-x-0 bg-emerald-500/20 h-[60%]"></div>
+</div>
+<span class="text-[9px] font-bold text-gray-400 uppercase">Fri</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-gray-200 rounded-md h-24 relative overflow-hidden">
+<div class="absolute bottom-0 inset-x-0 bg-emerald-500/20 h-[40%]"></div>
+</div>
+<span class="text-[9px] font-bold text-gray-400 uppercase">Sat</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-gray-200 rounded-md h-24 relative overflow-hidden">
+<div class="absolute bottom-0 inset-x-0 bg-emerald-500/20 h-[30%]"></div>
+</div>
+<span class="text-[9px] font-bold text-gray-400 uppercase">Sun</span>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="text-[10px] text-gray-400">Peak hour: <span class="text-gray-900">18:00 - 20:00</span></div>
+<div class="text-[10px] text-emerald-600 font-bold">+5.2% vs avg</div>
+</div>
+</div>
+<div class="dashboard-card flex flex-col h-full overflow-hidden">
+<div class="p-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
+<h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Critical Observations
+                </h3>
+<span class="text-[10px] font-bold text-gray-400 uppercase">3 Active</span>
+</div>
+<div class="p-4 space-y-3 overflow-y-auto max-h-[220px]">
+<div class="p-3 bg-red-50/50 border border-red-100 rounded-lg flex gap-3">
+<span class="material-symbols-outlined text-red-500 text-lg">error</span>
+<div>
+<p class="text-xs font-bold text-gray-900">Churn Risk Threshold</p>
+<p class="text-[10px] text-gray-500 leading-relaxed">42 members inactive &gt; 14 days. Intervention recommended.</p>
+</div>
+</div>
+<div class="p-3 bg-amber-50/50 border border-amber-100 rounded-lg flex gap-3">
+<span class="material-symbols-outlined text-amber-500 text-lg">inventory_2</span>
+<div>
+<p class="text-xs font-bold text-gray-900">Stock Anomaly</p>
+<p class="text-[10px] text-gray-500 leading-relaxed">Whey Isolate depletion rate exceeded 300% of projection.</p>
+</div>
+</div>
+<div class="p-3 bg-gray-100 border border-gray-200 rounded-lg flex gap-3 opacity-70">
+<span class="material-symbols-outlined text-gray-400 text-lg">verified</span>
+<div>
+<p class="text-xs font-bold text-gray-900">HVAC Efficiency</p>
+<p class="text-[10px] text-gray-500 leading-relaxed">Unit 4 optimization completed. Savings: $120/mo.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="dashboard-card overflow-hidden">
+<div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50/50">
+<h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Infrastructure Status</h3>
+<div class="flex items-center gap-2 text-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="font-bold text-emerald-600">92% Operational</span>
+</div>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-2 gap-x-8 gap-y-6">
+<div>
+<div class="flex justify-between text-[10px] font-bold text-gray-500 mb-1">
+<span>CARDIO DECK</span>
+<span class="text-gray-900">48/50 Units</span>
+</div>
+<div class="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[96%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] font-bold text-gray-500 mb-1">
+<span>STRENGTH ZONE</span>
+<span class="text-gray-900">22/24 Units</span>
+</div>
+<div class="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[91%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] font-bold text-gray-500 mb-1">
+<span>HVAC SYSTEMS</span>
+<span class="text-gray-900">4/4 Systems</span>
+</div>
+<div class="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[100%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] font-bold text-gray-500 mb-1">
+<span>IOT SENSORS</span>
+<span class="text-red-500">12/16 Online</span>
+</div>
+<div class="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+<div class="h-full bg-red-500 w-[75%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="dashboard-card overflow-hidden">
+<div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50/50">
+<h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Shift Audit Log</h3>
+<button class="text-[10px] font-bold text-gray-400 hover:text-gray-900 flex items-center gap-1">
+                    FULL LOG <span class="material-symbols-outlined text-xs">open_in_new</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100">
+<th class="px-6 py-3">Analytic/Staff</th>
+<th class="px-6 py-3">Task Vector</th>
+<th class="px-6 py-3">Time-Stamp</th>
+<th class="px-6 py-3 text-right">Verification</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<tr class="hover:bg-white transition-colors">
+<td class="px-6 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-gray-200 flex items-center justify-center font-bold text-[10px] text-gray-600">JD</div>
+<span class="font-bold text-gray-700">James D.</span>
+</div>
+</td>
+<td class="px-6 py-3 text-gray-500">Equipment Integrity Audit</td>
+<td class="px-6 py-3 text-gray-400">08:00:12</td>
+<td class="px-6 py-3 text-right">
+<span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-600 text-[9px] font-bold rounded">VALID</span>
+</td>
+</tr>
+<tr class="hover:bg-white transition-colors">
+<td class="px-6 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-gray-200 flex items-center justify-center font-bold text-[10px] text-gray-600">SA</div>
+<span class="font-bold text-gray-700">Sarah A.</span>
+</div>
+</td>
+<td class="px-6 py-3 text-gray-500">Inventory Sync-Lock</td>
+<td class="px-6 py-3 text-gray-400">10:30:45</td>
+<td class="px-6 py-3 text-right">
+<span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-600 text-[9px] font-bold rounded">VALID</span>
+</td>
+</tr>
+<tr class="hover:bg-white transition-colors">
+<td class="px-6 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-gray-200 flex items-center justify-center font-bold text-[10px] text-gray-600">MT</div>
+<span class="font-bold text-gray-700">Mike T.</span>
+</div>
+</td>
+<td class="px-6 py-3 text-gray-500">Maintenance Dispatch #4</td>
+<td class="px-6 py-3 text-gray-400">11:15:20</td>
+<td class="px-6 py-3 text-right">
+<span class="px-1.5 py-0.5 bg-gray-100 text-gray-500 text-[9px] font-bold rounded">PENDING</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-8 bg-white border-t border-gray-100">
+<div class="max-w-[1440px] mx-auto px-6 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--primary)]">analytics</span>
+<span class="font-extrabold text-gray-900">FlexHub BI Engine</span>
+</div>
+<div class="flex gap-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+<a class="hover:text-emerald-600 transition-colors" href="#">Compliance</a>
+<a class="hover:text-emerald-600 transition-colors" href="#">Security API</a>
+<a class="hover:text-emerald-600 transition-colors" href="#">Data Processing Agreement</a>
+</div>
+<p class="text-[10px] text-gray-400 mt-2 font-medium">© 2024 FlexHub Enterprise. Strategic Data View v4.2.0-stable.</p>
+</div>
+</footer>
+
+</body></html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Staff and Equipment Management Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#10b981", 
+                        "background-light": "#f0f6ff",
+                        "background-dark": "#0f172a",
+                        "card-light": "rgba(255, 255, 255, 0.8)",
+                        "card-dark": "rgba(30, 41, 59, 0.7)",
+                    },
+                    fontFamily: {
+                        display: ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1.5rem",
+                        'xl': "2rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #10b981;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 100%);
+        }
+        .dark body {
+            background: linear-gradient(135deg, #0f172a 0%, #064e3b 100%);
+        }
+        .glass-card {
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .staff-row:hover, .equipment-row:hover {
+            background-color: rgba(16, 185, 129, 0.05);
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #10b981;
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 dark:text-slate-100 transition-colors duration-300">
+<nav class="sticky top-0 z-50 px-8 py-4 flex items-center justify-between bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-white/20 dark:border-white/5">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">fitness_center</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-6 text-[13px] font-bold text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors py-1" href="#">Dashboard</a>
+<a class="hover:text-primary transition-colors py-1" href="#">Members</a>
+<a class="text-primary border-b-2 border-primary py-1" href="#">Staff Management</a>
+<a class="hover:text-primary transition-colors py-1" href="#">Financials</a>
+<a class="hover:text-primary transition-colors py-1" href="#">Revenue Calculator</a>
+<a class="hover:text-primary transition-colors py-1" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">dark_mode</span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-slate-900"></span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-700 mx-1"></div>
+<div class="flex items-center gap-3 pl-1">
+<div class="text-right hidden sm:block">
+<p class="text-[11px] font-bold leading-none mb-0.5">Admin User</p>
+<p class="text-[10px] text-slate-400 font-medium leading-none">Owner Access</p>
+</div>
+<img alt="Admin avatar" class="w-9 h-9 rounded-full border-2 border-white dark:border-slate-700 shadow-sm object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9nCv1QSX03jWhJBltoPL3zbFYZUx5KXZ7kezWseJogp4sdw5q6RD6YgFAbdrQir29zQFbm4dpP1zkMsivo8HwMzAcEAC7KSOScozkxV_HyJJPu2HL6xftj9G57HUTTcJ1lJY0xveLJ088JqW8fTX2npuV0Q3B3QRn7bvot2_7qAefJJC1w2h0hqHDPHOcn3kpHhbw9DUtJeV-_YiNMysDF4DqrWIkMDzcCna0WmIxBIcLUkntxtMYtKM0vtKTTVhAAPcPKynkmpFl"/>
+</div>
+</div>
+</nav>
+<main class="p-8 max-w-[1600px] mx-auto">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight">Staff &amp; Equipment</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Manage your team and facilities in one place</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2.5 bg-white/50 dark:bg-slate-800/50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-primary w-64 md:w-80 transition-all shadow-sm" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-8">
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-xl font-bold tracking-tight">Staff Management</h2>
+<button class="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-2xl font-bold hover:brightness-105 transition-all shadow-lg shadow-emerald-500/20 text-sm">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                        Add Staff
+                    </button>
+</div>
+<div class="glass-card bg-card-light dark:bg-card-dark rounded-xl overflow-hidden custom-shadow">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-100 dark:border-slate-800">
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Staff Member</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Department</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Weekly Hours</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="staff-row transition-colors cursor-pointer bg-emerald-50/30 dark:bg-emerald-900/10">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Staff" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9nCv1QSX03jWhJBltoPL3zbFYZUx5KXZ7kezWseJogp4sdw5q6RD6YgFAbdrQir29zQFbm4dpP1zkMsivo8HwMzAcEAC7KSOScozkxV_HyJJPu2HL6xftj9G57HUTTcJ1lJY0xveLJ088JqW8fTX2npuV0Q3B3QRn7bvot2_7qAefJJC1w2h0hqHDPHOcn3kpHhbw9DUtJeV-_YiNMysDF4DqrWIkMDzcCna0WmIxBIcLUkntxtMYtKM0vtKTTVhAAPcPKynkmpFl"/>
+<div>
+<p class="text-sm font-bold">Marcus Sterling</p>
+<p class="text-[11px] text-slate-500 font-medium">Senior Personal Trainer</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Fitness</span></td>
+<td class="px-6 py-4"><span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500 font-semibold">38 hrs</span></td>
+<td class="px-6 py-4 text-right"><span class="material-symbols-outlined text-slate-300">chevron_right</span></td>
+</tr>
+<tr class="staff-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="Staff" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHQBiYk9hzoHiULDqxopiBX0DoD2FUg-B1y-L-B-KLBxZ9YVJg8D80jqZPQRj076mnz-CRIE4a4yq4yWfMAYqW-KKhQR5P-ChBc_AlZFQo0vEcNkdK6gdtoUidnqAtTOebwz4K9pasbvkjiT5g1K7h2cCRPw_mXpSuEAqrbZKZGA3YKoydqRtubztY18b2vZupnzAUYV2_66u4jE3NoUrtXNbtfIMaHcFmOgayIydR9QCop0srJYjnpoMdxz43THyKTwjjLzORFYyI"/>
+<div>
+<p class="text-sm font-bold">Sophia Reynolds</p>
+<p class="text-[11px] text-slate-500 font-medium">Front Desk Lead</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Admin</span></td>
+<td class="px-6 py-4"><span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">ACTIVE</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500 font-semibold">40 hrs</span></td>
+<td class="px-6 py-4 text-right"><span class="material-symbols-outlined text-slate-300">chevron_right</span></td>
+</tr>
+<tr class="staff-row transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center text-orange-600 font-bold text-xs">JR</div>
+<div>
+<p class="text-sm font-bold">Jordan Rivera</p>
+<p class="text-[11px] text-slate-500 font-medium">Maintenance Supervisor</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4"><span class="text-sm font-medium">Maintenance</span></td>
+<td class="px-6 py-4"><span class="px-2.5 py-1 text-[10px] font-bold rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">ON LEAVE</span></td>
+<td class="px-6 py-4"><span class="text-sm text-slate-500 font-semibold">0 hrs</span></td>
+<td class="px-6 py-4 text-right"><span class="material-symbols-outlined text-slate-300">chevron_right</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-xl font-bold tracking-tight">Equipment Management</h2>
+<button class="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-2xl font-bold hover:brightness-105 transition-all shadow-lg shadow-emerald-500/20 text-sm">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                        Add Equipment
+                    </button>
+</div>
+<div class="glass-card bg-card-light dark:bg-card-dark rounded-xl overflow-hidden custom-shadow">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-100 dark:border-slate-800">
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Equipment Name</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Quantity</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Last Maintained</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="equipment-row transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">directions_run</span>
+</div>
+<div>
+<p class="text-sm font-bold">Pro-Tread X100</p>
+<p class="text-[11px] text-slate-500 font-medium">Cardio Zone</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-slate-600 dark:text-slate-300">12 Units</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-slate-500 font-medium">Oct 12, 2023</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full transition-colors">
+<div class="toggle-dot absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform"></div>
+</div>
+</label>
+<span class="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">Working</span>
+</div>
+</td>
+</tr>
+<tr class="equipment-row transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-indigo-600">
+<span class="material-symbols-outlined">fitness_center</span>
+</div>
+<div>
+<p class="text-sm font-bold">Hex Dumbbell Set</p>
+<p class="text-[11px] text-slate-500 font-medium">Free Weights</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-slate-600 dark:text-slate-300">24 Pairs</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-slate-500 font-medium">Jan 05, 2024</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full transition-colors">
+<div class="toggle-dot absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform"></div>
+</div>
+</label>
+<span class="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">Working</span>
+</div>
+</td>
+</tr>
+<tr class="equipment-row transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-600">
+<span class="material-symbols-outlined">back_hand</span>
+</div>
+<div>
+<p class="text-sm font-bold">Lat Pulldown Machine</p>
+<p class="text-[11px] text-slate-500 font-medium">Strength Training</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-bold text-slate-600 dark:text-slate-300">4 Units</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-slate-500 font-medium">Feb 20, 2024</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full transition-colors">
+<div class="toggle-dot absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform"></div>
+</div>
+</label>
+<span class="text-[10px] font-bold text-orange-500 uppercase tracking-wider">Maintenance</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<p class="text-xs font-medium text-slate-400 uppercase tracking-widest">Displaying 1-3 of 42 assets</p>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-xl bg-primary text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-500">2</button>
+<button class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="col-span-12 lg:col-span-4">
+<div class="glass-card bg-card-light dark:bg-card-dark p-8 rounded-xl custom-shadow sticky top-28">
+<div class="flex flex-col items-center text-center mb-8">
+<div class="relative mb-6">
+<div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-primary to-indigo-500">
+<img alt="Selected Staff" class="w-full h-full rounded-full object-cover border-4 border-white dark:border-slate-900 shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9nCv1QSX03jWhJBltoPL3zbFYZUx5KXZ7kezWseJogp4sdw5q6RD6YgFAbdrQir29zQFbm4dpP1zkMsivo8HwMzAcEAC7KSOScozkxV_HyJJPu2HL6xftj9G57HUTTcJ1lJY0xveLJ088JqW8fTX2npuV0Q3B3QRn7bvot2_7qAefJJC1w2h0hqHDPHOcn3kpHhbw9DUtJeV-_YiNMysDF4DqrWIkMDzcCna0WmIxBIcLUkntxtMYtKM0vtKTTVhAAPcPKynkmpFl"/>
+</div>
+<button class="absolute bottom-1 right-1 w-10 h-10 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center shadow-lg border border-slate-100 dark:border-slate-700 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+<h2 class="text-2xl font-bold">Marcus Sterling</h2>
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-extrabold rounded-full uppercase tracking-widest mt-2">Senior Trainer • Fitness</span>
+</div>
+<div class="space-y-6">
+<div>
+<h4 class="font-bold text-sm mb-3">Professional Certifications</h4>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded-lg border border-slate-200 dark:border-slate-700">NASM-CPT</span>
+<span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded-lg border border-slate-200 dark:border-slate-700">CrossFit L2</span>
+<span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded-lg border border-slate-200 dark:border-slate-700">CPR/AED</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4">Assigned Classes (This Week)</h4>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-white/40 dark:bg-slate-800/40 rounded-2xl border border-white/20 dark:border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined text-sm">fitness_center</span>
+</div>
+<div>
+<p class="text-xs font-bold">HIIT Blast</p>
+<p class="text-[10px] text-slate-400 font-medium">Mon, Wed • 08:00 AM</p>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-400">12/15</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-white/40 dark:bg-slate-800/40 rounded-2xl border border-white/20 dark:border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-indigo-600">
+<span class="material-symbols-outlined text-sm">exercise</span>
+</div>
+<div>
+<p class="text-xs font-bold">Strength Basics</p>
+<p class="text-[10px] text-slate-400 font-medium">Tue, Thu • 05:30 PM</p>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-400">8/10</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total Pay</p>
+<p class="text-xs font-bold">$1,250.00 <span class="text-[10px] text-emerald-500 font-medium">(Net)</span></p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Satisfaction</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-yellow-400 fill-1">star</span>
+<p class="text-xs font-bold">4.9/5</p>
+</div>
+</div>
+</div>
+<button class="w-full py-4 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+                        View Full Schedule
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="p-8 text-center text-slate-400 text-xs font-medium">
+    © 2024 FlexHub Gym Management Systems. All rights reserved.
+</footer>
+
+</body></html>

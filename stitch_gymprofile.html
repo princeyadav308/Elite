@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlexHub - Gym Profile &amp; Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #00d09c;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+        }
+        .settings-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f1f5f9;
+        }
+        .nav-link {
+            @apply px-4 py-2 text-sm font-semibold transition-all duration-200 border-b-2 border-transparent hover:text-[var(--primary)];
+        }
+        .nav-link.active {
+            @apply text-[var(--primary)] border-[var(--primary)];
+        }
+        .sidebar-item {
+            @apply flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all;
+        }
+        .sidebar-item.active {
+            @apply bg-emerald-50 text-[var(--primary)];
+        }
+        .input-group label {
+            @apply block text-sm font-semibold text-slate-700 mb-2;
+        }
+        .input-group input, .input-group select, .input-group textarea {
+            @apply w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent outline-none transition-all;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between py-4">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-[var(--primary)] rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-200">
+<span class="material-symbols-outlined text-2xl">fitness_center</span>
+</div>
+<span class="text-2xl font-extrabold tracking-tight text-slate-800">FlexHub</span>
+</div>
+<div class="hidden lg:flex items-center gap-2">
+<a class="nav-link text-slate-500" href="#">Dashboard</a>
+<a class="nav-link text-slate-500" href="#">Members</a>
+<a class="nav-link text-slate-500" href="#">Schedules</a>
+<a class="nav-link text-slate-500" href="#">Revenue</a>
+<a class="nav-link active" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="h-8 w-px bg-slate-200"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-slate-800">Elite Fitness Center</p>
+<p class="text-[10px] font-medium text-slate-400 uppercase tracking-wider">Gym Owner</p>
+</div>
+<img alt="User profile" class="w-10 h-10 rounded-full border-2 border-white shadow-sm ring-1 ring-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo4wG0rvN3SUOFMUUtemnIkRi7-wsWwjGx8QtdYX6qs3pfU6_Gs9Gdwz5SWwDkstJXw5O0WtlwqgmN2U4XlWb3IPI7V7WAxzsZBApEbEBylbEkcJPG-gZ0_qQ5U__snPwLH1l-4yUAtId0GKg1WdgdHn9sE7ppSJoDieMGtt01yVlgmEkpbRz75oPSJC2bppuNZzBQL0Ij0ygfL-QQjVPYMDmJTLIybRUIZkKGgdwctqIn_sKH3JdDm83MXoP7JER2YJy2OxPG9tRX"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-6 py-10 w-full flex-grow">
+<div class="flex flex-col lg:flex-row gap-8">
+<aside class="w-full lg:w-72 space-y-6">
+<div class="settings-card p-6">
+<div class="flex items-center gap-4 mb-8">
+<img alt="Gym Logo" class="w-12 h-12 rounded-xl object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo4wG0rvN3SUOFMUUtemnIkRi7-wsWwjGx8QtdYX6qs3pfU6_Gs9Gdwz5SWwDkstJXw5O0WtlwqgmN2U4XlWb3IPI7V7WAxzsZBApEbEBylbEkcJPG-gZ0_qQ5U__snPwLH1l-4yUAtId0GKg1WdgdHn9sE7ppSJoDieMGtt01yVlgmEkpbRz75oPSJC2bppuNZzBQL0Ij0ygfL-QQjVPYMDmJTLIybRUIZkKGgdwctqIn_sKH3JdDm83MXoP7JER2YJy2OxPG9tRX"/>
+<div>
+<h2 class="text-sm font-bold text-slate-800 leading-tight">Elite Fitness</h2>
+<p class="text-[10px] font-semibold text-slate-400 tracking-wider uppercase">ID: GYM-4421</p>
+</div>
+</div>
+<div class="space-y-1">
+<a class="sidebar-item text-slate-600 hover:bg-slate-50" href="#">
+<span class="material-symbols-outlined">person</span>
+                        Profile Information
+                    </a>
+<a class="sidebar-item active" href="#">
+<span class="material-symbols-outlined">store</span>
+                        Gym Profile
+                    </a>
+<a class="sidebar-item text-slate-600 hover:bg-slate-50" href="#">
+<span class="material-symbols-outlined">payments</span>
+                        Payouts
+                    </a>
+<a class="sidebar-item text-slate-600 hover:bg-slate-50" href="#">
+<span class="material-symbols-outlined">credit_card</span>
+                        Subscriptions
+                    </a>
+</div>
+<div class="pt-6 mt-6 border-t border-slate-100">
+<button class="w-full flex items-center gap-3 px-4 py-3 text-red-500 font-bold text-sm hover:bg-red-50 rounded-xl transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+                        Logout
+                    </button>
+</div>
+</div>
+<div class="bg-indigo-600 rounded-2xl p-6 text-white shadow-xl shadow-indigo-100 relative overflow-hidden">
+<div class="relative z-10">
+<p class="text-xs font-bold text-indigo-200 uppercase tracking-widest mb-1">Support</p>
+<h3 class="text-lg font-bold mb-4">Need help managing?</h3>
+<p class="text-xs text-indigo-100 mb-4 leading-relaxed">Contact your dedicated account manager for any technical assistance.</p>
+<button class="w-full py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-xs font-bold transition-colors">
+                        Contact Support
+                    </button>
+</div>
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-indigo-500 rounded-full opacity-20"></div>
+</div>
+</aside>
+<div class="flex-1 space-y-8">
+<div class="settings-card overflow-hidden">
+<div class="p-6 border-b border-slate-50 bg-slate-50/50">
+<h3 class="text-lg font-bold text-slate-800">Gym Profile Details</h3>
+<p class="text-sm text-slate-500">Manage your facility information and location settings.</p>
+</div>
+<div class="p-8 space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-6">
+<div class="input-group">
+<label>Gym Name</label>
+<input type="text" value="Elite Fitness Center"/>
+</div>
+<div class="input-group">
+<label>Street Address</label>
+<input type="text" value="123 Performance Way"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="input-group">
+<label>Pincode</label>
+<input type="text" value="90210"/>
+</div>
+<div class="input-group">
+<label>City</label>
+<input type="text" value="Los Angeles"/>
+</div>
+</div>
+<div class="input-group">
+<label>Country</label>
+<select>
+<option selected="">United States</option>
+<option>Canada</option>
+<option>United Kingdom</option>
+</select>
+</div>
+</div>
+<div class="space-y-6">
+<div class="input-group h-full flex flex-col">
+<label>Update Gym Logo</label>
+<div class="flex-grow border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50 flex flex-col items-center justify-center p-6 text-center hover:border-[var(--primary)] hover:bg-emerald-50/30 transition-all cursor-pointer">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3">
+<span class="material-symbols-outlined text-slate-400">upload_file</span>
+</div>
+<p class="text-sm font-bold text-slate-700">Drag and drop logo here</p>
+<p class="text-xs text-slate-400 mt-1">PNG, JPG up to 5MB</p>
+<button class="mt-4 px-4 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50">Browse Files</button>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<label class="block text-sm font-semibold text-slate-700">Location Map</label>
+<div class="w-full h-48 bg-slate-100 rounded-2xl overflow-hidden relative group">
+<img alt="Map" class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjCcX4wZRWXQl0X1n-hpVK7qWQXY2znZKIXpnqJ38Y1LL5rEA-WApNCfDO_3GWPlHNINYQXz_1Zc7Lsda927M36YTKYCbfe_9K_LUlhAU6IHb1GBNv0bhVdjxZh34Xud1TMgNiFw0tPRsC6jbKYjHRU8cd5PUPCyxRHr4CgN5YE8Ar9B_QSLyasV889q0wcP-zJV1E9wZBoZQAR4bIyCJ6du36n5WDt-kcO8vrkD03FzmNgsmM3Ntiz_Yzpli62iKwd-6_xrIcXyJ0"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white shadow-xl">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+</div>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-slate-200">
+<p class="text-[10px] font-bold text-slate-600 uppercase">34.0522° N, 118.2437° W</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="settings-card">
+<div class="p-6 border-b border-slate-50 bg-slate-50/50">
+<h3 class="text-lg font-bold text-slate-800">Social Presence</h3>
+<p class="text-sm text-slate-500">Connect your gym's digital platforms.</p>
+</div>
+<div class="p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="input-group">
+<label class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500 text-lg">language</span>
+                                Website URL
+                            </label>
+<input placeholder="https://elitefitness.com" type="url" value="https://elitefitness.com"/>
+</div>
+<div class="input-group">
+<label class="flex items-center gap-2">
+<span class="material-symbols-outlined text-pink-500 text-lg">photo_camera</span>
+                                Instagram Handle
+                            </label>
+<input placeholder="@elitefitness_la" type="text" value="@elitefitness_la"/>
+</div>
+<div class="input-group">
+<label class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-500 text-lg">chat</span>
+                                WhatsApp Number
+                            </label>
+<input placeholder="+1 (555) 000-0000" type="tel" value="+1 (555) 123-4567"/>
+</div>
+</div>
+<div class="mt-8 flex justify-end border-t border-slate-100 pt-6">
+<button class="bg-[var(--primary)] text-white px-8 py-3 rounded-xl font-bold text-sm hover:opacity-90 shadow-lg shadow-emerald-100 transition-all">
+                            Save Profile Settings
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto py-10 bg-white border-t border-slate-100">
+<div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[var(--primary)]">fitness_center</span>
+<span class="font-extrabold text-slate-800">FlexHub</span>
+</div>
+<div class="flex gap-8 text-xs font-semibold text-slate-400">
+<a class="hover:text-[var(--primary)] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[var(--primary)] transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-[var(--primary)] transition-colors" href="#">Help Center</a>
+</div>
+<p class="text-xs text-slate-400 mt-2">© 2024 FlexHub Inc. Gym Management Suite.</p>
+</div>
+</footer>
+
+</body></html>
